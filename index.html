@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Meu Portfólio</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1>Olá, eu sou <span class="highlight">Seu Nome</span></h1>
+                <p>Desenvolvedor Web</p>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="about">
+            <h2>Sobre Mim</h2>
+            <div class="about-content">
+                <p>Vou colocar uma descrição legal</p>
+            </div>
+        </section>
+
+        <section id="projetos" class="projects">
+            <h2>Meus Projetos</h2>
+            <div class="project-grid">
+                <div class="project-one">
+                    <video loop autoplay muted>
+                        <source src="assets/videos/API_Clima.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                    <p class="description-project-one">
+                        Desenvolvi uma API de clima onde tem integração com o OpenStreetMap, weatherapi e pexels.
+                        Usei o React com as bibliotecas Axios, Three.js para renderização 3D, Leaflet para mapas e Vite como build tool.
+                    </p>
+                    <div class="technologies-project-one">
+                        <h3>Tecnologias Utilizadas</h3>
+                        <div class="tech-icons">
+                            <img src="assets/icons/react-2.svg" alt="React 18" class="technology-icon" title="React 18 - Framework principal">
+                            <img src="assets/icons/vite.svg" alt="Vite" class="technology-icon" title="Vite - Build tool e servidor de desenvolvimento">
+                            <img src="assets/icons/threejs.svg" alt="Three.js" class="technology-icon" title="Three.js - Renderização 3D">
+                            <img src="assets/icons/react-three-fiber.svg" alt="React Three Fiber" class="technology-icon" title="React Three Fiber - Integração Three.js com React">
+                            <img src="assets/icons/leaflet.svg" alt="Leaflet" class="technology-icon" title="Leaflet - Visualização de mapas">
+                            <img src="assets/icons/openstreetmap.svg" alt="OpenStreetMap" class="technology-icon" title="OpenStreetMap - Dados de mapas">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="contact">
+            <h2>Contato</h2>
+            <form id="contact-form">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Mensagem" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Seu Nome. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 
