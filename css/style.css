@@ -24,6 +24,81 @@ body {
     --gray-400: #9ca3af;
 }
 
+/* Development Notice Banner */
+.dev-notice {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #FF6B35, #F7931E);
+    color: #FFFFFF;
+    padding: 12px 20px;
+    z-index: 100;
+    animation: slideDown 0.5s ease-out;
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+}
+
+.dev-notice-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.dev-notice-content i:first-child {
+    color: #FFFFFF;
+    animation: pulse 2s infinite;
+}
+
+.dev-notice-close {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.dev-notice-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dev-notice.hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Ajuste para compensar o banner quando presente */
+body.dev-notice-visible {
+    padding-top: 48px;
+}
+
 /* Header */
 header {
     position: fixed;
@@ -34,6 +109,11 @@ header {
     border-bottom: 1px solid var(--border-gray);
     z-index: 50;
     transition: all 0.3s ease;
+}
+
+/* Ajuste do header quando o banner está presente */
+body.dev-notice-visible header {
+    top: 48px;
 }
 
 header.scrolled {
@@ -112,6 +192,11 @@ nav {
     justify-content: center;
     padding: 0 1.5rem;
     padding-top: 5rem;
+}
+
+/* Ajuste do hero quando o banner está presente */
+body.dev-notice-visible .hero {
+    padding-top: 7rem;
 }
 
 .hero-content {
@@ -592,6 +677,36 @@ footer {
 }
 
 /* Responsive Design */
+/* Mobile responsivo para o banner */
+@media (max-width: 767px) {
+    .dev-notice {
+        padding: 10px 15px;
+    }
+    
+    .dev-notice-content {
+        font-size: 13px;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+    
+    .dev-notice-close {
+        position: relative;
+        margin-top: 5px;
+    }
+    
+    body.dev-notice-visible {
+        padding-top: 65px;
+    }
+    
+    body.dev-notice-visible header {
+        top: 65px;
+    }
+    
+    body.dev-notice-visible .hero {
+        padding-top: 8rem;
+    }
+}
+
 @media (min-width: 768px) {
     .nav-menu {
         display: flex;
@@ -730,4 +845,4 @@ footer {
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
-} 
+}

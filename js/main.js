@@ -80,4 +80,35 @@ window.addEventListener('scroll', () => {
     } else {
         header.classList.remove('scrolled');
     }
-}); 
+});
+
+// Development Notice functionality
+function closeDeveloperNotice() {
+    const devNotice = document.querySelector('.dev-notice');
+    const body = document.body;
+    
+    if (devNotice) {
+        devNotice.classList.add('hidden');
+        body.classList.remove('dev-notice-visible');
+        
+        // Remove o elemento após a animação
+        setTimeout(() => {
+            devNotice.remove();
+        }, 300);
+        
+        // Salvar preferência no localStorage
+        localStorage.setItem('devNoticeHidden', 'true');
+    }
+}
+
+// Verificar se o usuário já fechou a notificação
+document.addEventListener('DOMContentLoaded', () => {
+    const devNoticeHidden = localStorage.getItem('devNoticeHidden');
+    const devNotice = document.querySelector('.dev-notice');
+    
+    if (devNoticeHidden === 'true' && devNotice) {
+        devNotice.remove();
+    } else if (devNotice) {
+        document.body.classList.add('dev-notice-visible');
+    }
+});
