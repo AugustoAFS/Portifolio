@@ -1,12 +1,33 @@
+"use strict";
 // Smooth scroll para links de navegação
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
+
+// Menu mobile toggle
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navMenu = document.querySelector('.nav-menu');
+
+if (mobileMenuBtn && navMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+    });
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('show');
+        });
+    });
+}
 
 // Animação do header ao rolar
 let lastScroll = 0;
@@ -32,22 +53,10 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Formulário de contato
-const contactForm = document.getElementById('contact-form');
-
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Aqui você pode adicionar a lógica para enviar o formulário
-    // Por exemplo, usando fetch para enviar para um backend
-    
-    alert('Mensagem enviada com sucesso!');
-    contactForm.reset();
-});
-
 // Animação de entrada dos elementos
 const observerOptions = {
-    threshold: 0.1
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -58,7 +67,17 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('section').forEach(section => {
-    section.classList.add('fade-in');
-    observer.observe(section);
+// Observar seções e elementos para animação
+document.querySelectorAll('section, .project-card, .experience-item').forEach(element => {
+    element.classList.add('fade-in');
+    observer.observe(element);
+});
+
+// Adicionar classes de scroll para o header
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
 }); 

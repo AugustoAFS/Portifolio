@@ -3,82 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Augusto Farias dos Santos - Fullstack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <nav>
-            <div class="logo">Meu Portfólio</div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
+            <div class="nav-container">
+                <a href="#" class="logo">AFS</a>
+                <ul class="nav-menu nav-links">
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#experience">Experiência</a></li>
+                    <li><a href="#projects">Projetos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <section id="inicio" class="hero">
-            <div class="hero-content">
-                <h1>Olá, eu sou <span class="highlight">Seu Nome</span></h1>
-                <p>Desenvolvedor Web</p>
-                <div class="social-links">
-                    <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-greeting">Olá, meu nome é</p>
+            <h1 class="hero-title">
+                <span>Augusto Farias</span>
+                <span class="highlight">dos Santos</span>
+            </h1>
+            <h2 class="hero-subtitle">
+                Desenvolvedor Fullstack focado em 
+                <span class="highlight">.NET</span> e 
+                <span class="highlight-green">Angular</span>
+            </h2>
+            <p class="hero-description">
+                Transformando ideias em software escalável e soluções inovadoras.
+            </p>
+            <a href="#projects" class="cta-button">
+                Ver Projetos
+            </a>
+        </div>
+    </section>
 
-        <section id="sobre" class="about">
-            <h2>Sobre Mim</h2>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="number">01.</span> Sobre Mim
+            </h2>
             <div class="about-content">
-                <p>Vou colocar uma descrição legal</p>
-            </div>
-        </section>
-
-        <section id="projetos" class="projects">
-            <h2>Meus Projetos</h2>
-            <div class="project-grid">
-                <div class="project-one">
-                    <video loop autoplay muted>
-                        <source src="assets/videos/API_Clima.mp4" type="video/mp4">
-                        Seu navegador não suporta o elemento de vídeo.
-                    </video>
-                    <p class="description-project-one">
-                        Desenvolvi uma API de clima onde tem integração com o OpenStreetMap, weatherapi e pexels.
-                        Usei o React com as bibliotecas Axios, Three.js para renderização 3D, Leaflet para mapas e Vite como build tool.
+                <div class="about-text">
+                    <p>
+                        Olá! Sou Augusto, um desenvolvedor fullstack apaixonado por criar soluções robustas e escaláveis. 
+                        Minha jornada na programação começou com C# e .NET, e desde então venho expandindo meus conhecimentos 
+                        para o ecossistema completo de desenvolvimento web.
                     </p>
-                    <div class="technologies-project-one">
-                        <h3>Tecnologias Utilizadas</h3>
-                        <div class="tech-icons">
-                            <img src="assets/icons/react-2.svg" alt="React 18" class="technology-icon" title="React 18 - Framework principal">
-                            <img src="assets/icons/vite.svg" alt="Vite" class="technology-icon" title="Vite - Build tool e servidor de desenvolvimento">
-                            <img src="assets/icons/threejs.svg" alt="Three.js" class="technology-icon" title="Three.js - Renderização 3D">
-                            <img src="assets/icons/react-three-fiber.svg" alt="React Three Fiber" class="technology-icon" title="React Three Fiber - Integração Three.js com React">
-                            <img src="assets/icons/leaflet.svg" alt="Leaflet" class="technology-icon" title="Leaflet - Visualização de mapas">
-                            <img src="assets/icons/openstreetmap.svg" alt="OpenStreetMap" class="technology-icon" title="OpenStreetMap - Dados de mapas">
+                    <p>
+                        Atualmente, foco em tecnologias como <span class="highlight">C#</span>, 
+                        <span class="highlight">.NET Core</span>, <span class="highlight-green">Angular</span>, 
+                        e <span class="highlight-purple">SQL Server</span>. Acredito que a combinação de backend 
+                        sólido com frontend moderno é a chave para aplicações de sucesso.
+                    </p>
+                    <p>
+                        Quando não estou codificando, você me encontra explorando novas tecnologias, 
+                        contribuindo para projetos open source ou compartilhando conhecimento com a comunidade.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <div class="profile-container">
+                        <div class="profile-inner">
+                            <div class="profile-placeholder">
+                                <i class="fas fa-user"></i>
+                                <p>Foto de Perfil</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contato" class="contact">
-            <h2>Contato</h2>
-            <form id="contact-form">
-                <input type="text" placeholder="Nome" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Mensagem" required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
-        </section>
-    </main>
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="number">02.</span> Experiência
+            </h2>
+            <div class="experience-list">
 
+                <!-- Experience 1 -->
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Desenvolvedor Backend C#</h3>
+                            <p class="experience-company">Trabalha Brasil</p>
+                            <p class="experience-period">2025 - Presente</p>
+                        </div>
+                        <div class="experience-description">
+                            <ul class="experience-list">
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Desenvolvimento do produto Trabalha Brasil com C# e .NET Core
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Arquitetura DDD
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Metodologia Ágil Scrum
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Otimização de performance e implementação de práticas de CI/CD
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Desenvolvedor Fullstack</h3>
+                            <p class="experience-company">BNE - Banco Nacional de Empregos</p>
+                            <p class="experience-period">2024 - 2025</p>
+                        </div>
+                        <div class="experience-description">
+                            <ul class="experience-list">
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Desenvolvimento de aplicações web com Angular e ASP.NET Core
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Criação de Api's robustas e escaláveis
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Arquitetura limpa e Código limpo
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Participação em projetos ágeis com Scrum
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="experience-item">
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Auxiliar de desenvolvimento</h3>
+                            <p class="experience-company">Projeto IFBLOG - IFPR Campus Colombo</p>
+                            <p class="experience-period">2023 - 2024</p>
+                        </div>
+                        <div class="experience-description">
+                            <ul class="experience-list">
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Desenvolvimento de sistemas Web com PHP e MySQL
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Produto focado em juntar todos os TCC's do IFPR Campus Colombo
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Desenvolvimento de um Monolito com PHP, MySQL, Bootstrap, JavaScript e HTML
+                                </li>
+                                <li>
+                                    <span class="bullet">▹</span>
+                                    Participação em projetos ágeis com Scrum
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="projects-container">
+            <h2 class="section-title">
+                <span class="number">03.</span> Projetos em Destaque
+            </h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="project-title">API de Clima</h3>
+                    <video src="assets/videos/Api_Clima.mp4" alt="API de Clima" autoplay muted loop></video>
+                    <p class="project-description">
+                        Sistema de previsão do tempo com integração OpenStreetMap, WeatherAPI e Pexels. 
+                        Interface 3D com Three.js e mapas interativos.
+                    </p>
+                    <div class="project-tech">
+                        <div class="tech-icon">
+                            <img src="assets/icons/react-2.svg" alt="React" title="React">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/threejs.svg" alt="Three.js" title="Three.js">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/react-three-fiber.svg" alt="React Three Fiber" title="React Three Fiber">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/openstreetmap.svg" alt="OpenStreetMap" title="OpenStreetMap">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/leaflet.svg" alt="Leaflet" title="Leaflet">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/vite.svg" alt="Vite" title="Vite">
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/AugustoAFS/API_CLIMA" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-content">
+            <h2 class="section-title">
+                <span class="number">04.</span> Entre em contato
+            </h2>
+            <p class="contact-description">
+               Baixe meu currículo clicando no botão abaixo
+            </p>
+            <div class="contact-actions">
+                <a href="mailto:augusto.farias.2003@gmail.com" class="contact-button" target="_blank">
+                    <i class="fas fa-envelope"></i>
+                    Email
+                </a>
+                <a href="PDF/#" class="contact-button" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                    Currículo
+                </a>
+                <a href="https://github.com/AugustoAFS" target="_blank" class="contact-button">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank" class="contact-button">
+                    <i class="fab fa-linkedin"></i>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Seu Nome. Todos os direitos reservados.</p>
+        <div class="footer-content">
+            <p>Desenvolvido por Augusto Farias dos Santos</p>
+            <p>&copy; 2025 Augusto Farias dos Santos. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
     <script src="js/main.js"></script>
