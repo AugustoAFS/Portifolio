@@ -1,0 +1,131 @@
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--blue-main);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+    z-index: 50;
+    transition: all 0.3s ease;
+}
+
+nav {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.125rem;
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    color: var(--electric-blue);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--electric-blue);
+}
+
+.mobile-menu-btn {
+    display: block;
+    color: var(--electric-blue);
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 767px) {
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--night);
+        border-top: 1px solid var(--border-gray);
+        flex-direction: column;
+        padding: 1rem 0;
+        display: none;
+    }
+    
+    .nav-menu.show {
+        display: flex;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .nav-links li {
+        width: 100%;
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--border-gray);
+    }
+    
+    .nav-links a:hover {
+        background-color: var(--night-light);
+    }
+}
+
+/* Responsive */
+@media (min-width: 480px) {
+    nav {
+        padding: 0 1.25rem;
+        padding-top: 0.9375rem;
+        padding-bottom: 0.9375rem;
+    }
+    
+    .logo {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 768px) {
+    nav {
+        padding: 0 1.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .nav-menu {
+        display: flex !important;
+    }
+    
+    .mobile-menu-btn {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav-links {
+        gap: 2.5rem;
+    }
+}

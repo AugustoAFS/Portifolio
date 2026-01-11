@@ -2,45 +2,96 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Augusto Farias dos Santos - Fullstack Developer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="generator" content="HTML5">
+    <meta name="description" content="Augusto Farias dos Santos - Desenvolvedor Fullstack especializado em .NET e Angular. Transformando ideias em software escalável e soluções inovadoras.">
+    <meta name="keywords" content="desenvolvedor fullstack, .NET, Angular, desenvolvedor web, software, programador">
+    <meta name="author" content="Augusto Farias dos Santos">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#0a192f">
+    <meta name="color-scheme" content="dark">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AFS Portfolio">
+    
+    <!-- Security (outros headers estão no .htaccess) -->
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Augusto Farias dos Santos - Developer">
+    <meta property="og:description" content="Desenvolvedor Fullstack focado em .NET e Angular. Transformando ideias em software escalável.">
+    <meta property="og:url" content="https://augustosantos.com.br/">
+    <meta property="og:image" content="https://augustosantos.com.br/assets/images/og-image.jpg">
+    <meta property="og:locale" content="pt_BR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Augusto Farias dos Santos - Developer">
+    <meta name="twitter:description" content="Desenvolvedor Fullstack focado em .NET e Angular.">
+    <meta name="twitter:image" content="https://augustosantos.com.br/assets/images/og-image.jpg">
+    <link rel="canonical" href="https://augustosantos.com.br/">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    
+    <title>Augusto Farias dos Santos - Developer</title>
+    
+    <!-- Critical CSS Inline para Performance -->
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}:root{--night:#121212;--blue-main:#0a192fe6;--electric-blue:#00BFFF;--mint-green:#00FFC8;--gray-300:#d1d5db;--gray-400:#9ca3af}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#FFF;background:#121212;overflow-x:hidden}img,video{max-width:100%;height:auto;display:block}header{position:fixed;top:0;width:100%;background:var(--blue-main);z-index:50}nav{max-width:72rem;margin:0 auto;padding:.875rem 1rem}.nav-container{display:flex;justify-content:space-between;align-items:center}.logo{font-size:1.125rem;font-weight:600;color:var(--electric-blue);text-decoration:none}.nav-links{display:flex;list-style:none;gap:2rem}.nav-links a{color:#FFF;text-decoration:none;transition:color .3s}.nav-links a:hover{color:var(--electric-blue)}.mobile-menu-btn{color:var(--electric-blue);background:0 0;border:none;font-size:1.25rem;cursor:pointer}.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1rem 0}.hero-content{max-width:64rem;margin:0 auto;text-align:center}.hero-greeting{color:var(--mint-green);font-size:.75rem;margin-bottom:.75rem}.hero-title{font-size:2rem;font-weight:700;margin-bottom:1rem;line-height:1.2}.hero-title .highlight{color:var(--electric-blue)}.hero-subtitle{font-size:1.125rem;color:var(--gray-300);margin-bottom:1.5rem}.hero-subtitle .highlight{color:var(--electric-blue)}.hero-subtitle .highlight-green{color:var(--mint-green)}.hero-description{font-size:1rem;color:var(--gray-400);margin-bottom:2rem;max-width:32rem;margin-left:auto;margin-right:auto}.cta-button{display:inline-block;background:var(--electric-blue);color:var(--night);font-weight:600;padding:1rem 2rem;border-radius:.5rem;text-decoration:none;transition:all .3s}@media (min-width:480px){.hero-title{font-size:2.5rem}}
+    </style>
+    
+    
+    
+    <!-- Preload apenas CSS críticos -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="css/header.css" as="style">
+    <link rel="preload" href="css/hero.css" as="style">
+    
+    <!-- CSS críticos -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/hero.css">
+    
+    <!-- CSS não-críticos - lazy loading -->
+    <link rel="stylesheet" href="css/about.css" media="print" onload="this.media='all';this.onload=null;">
+    <link rel="stylesheet" href="css/experience.css" media="print" onload="this.media='all';this.onload=null;">
+    <link rel="stylesheet" href="css/projects.css" media="print" onload="this.media='all';this.onload=null;">
+    <link rel="stylesheet" href="css/contact.css" media="print" onload="this.media='all';this.onload=null;">
+    <link rel="stylesheet" href="css/footer.css" media="print" onload="this.media='all';this.onload=null;">
+    
+    <noscript>
+        <link rel="stylesheet" href="css/about.css">
+        <link rel="stylesheet" href="css/experience.css">
+        <link rel="stylesheet" href="css/projects.css">
+        <link rel="stylesheet" href="css/contact.css">
+        <link rel="stylesheet" href="css/footer.css">
+    </noscript>
 </head>
-<body>
-    <!-- Header -->
-    <!-- Development Notice Banner -->
-    <div class="dev-notice">
-        <div class="dev-notice-content">
-            <i class="fas fa-tools"></i>
-            <span>Portfólio em desenvolvimento</span>
-            <button class="dev-notice-close" onclick="closeDeveloperNotice()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    </div>
+<body id="top">
+    <!-- Skip Link para Acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
     
     <header>
-        <nav>
+        <nav aria-label="Navegação principal">
             <div class="nav-container">
-                <a href="#" class="logo">AFS</a>
+                <a href="#top" class="logo" aria-label="Augusto Farias dos Santos - Ir para o início">AFS</a>
                 <ul class="nav-menu nav-links">
                     <li><a href="#about">Sobre</a></li>
                     <li><a href="#experience">Experiência</a></li>
                     <li><a href="#projects">Projetos</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+                <button class="mobile-menu-btn" aria-label="Menu de navegação" aria-expanded="false" type="button">
+                    <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-bars"></use></svg>
                 </button>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <main id="main-content">
     <section class="hero">
         <div class="hero-content">
             <p class="hero-greeting">Olá, meu nome é</p>
@@ -56,59 +107,48 @@
             <p class="hero-description">
                 Transformando ideias em software escalável e soluções inovadoras.
             </p>
-            <a href="#projects" class="cta-button">
+            <a href="#projects" class="cta-button" aria-label="Ver meus projetos desenvolvidos">
                 Ver Projetos
             </a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about" aria-labelledby="about-title">
         <div class="section-container">
-            <h2 class="section-title">
-                <span class="number">01.</span> Sobre Mim
+            <h2 id="about-title" class="section-title">
+                <span class="number" aria-hidden="true"></span> Sobre Mim
             </h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        Olá! Sou Augusto, um desenvolvedor fullstack apaixonado por criar soluções robustas e escaláveis. 
+                        Olá! Sou Augusto, um desenvolvedor fullstack. 
                         Minha jornada na programação começou com C# e .NET, e desde então venho expandindo meus conhecimentos 
                         para o ecossistema completo de desenvolvimento web.
                     </p>
                     <p>
                         Atualmente, foco em tecnologias como <span class="highlight">C#</span>, 
                         <span class="highlight">.NET Core</span>, <span class="highlight-green">Angular</span>, 
-                        e <span class="highlight-purple">SQL Server</span>. Acredito que a combinação de backend 
-                        sólido com frontend moderno é a chave para aplicações de sucesso.
+                        e <span class="highlight-purple">SQL Server</span>.
                     </p>
                     <p>
-                        Quando não estou codificando, você me encontra explorando novas tecnologias, 
-                        contribuindo para projetos open source ou compartilhando conhecimento com a comunidade.
+                        Estou sempre em busca de novos desafios e oportunidades para aplicar minhas habilidades. Vamos construir algo incrível juntos!
                     </p>
                 </div>
                 <div class="about-image">
                     <div class="profile-container">
-                        <div class="profile-inner">
-                            <div class="profile-placeholder">
-                                <i class="fas fa-user"></i>
-                                <p>Foto de Perfil</p>
-                            </div>
-                        </div>
+                        <img src="assets/images/profile.jpg" alt="Foto de Augusto Farias dos Santos" loading="lazy" width="300" height="300" decoding="async" importance="low" style="aspect-ratio:1/1">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
+    <section id="experience" aria-labelledby="experience-title">
         <div class="section-container">
-            <h2 class="section-title">
-                <span class="number">02.</span> Experiência
+            <h2 id="experience-title" class="section-title">
+                <span class="number" aria-hidden="true"></span> Experiência
             </h2>
             <div class="experience-list">
-
-                <!-- Experience 1 -->
                 <div class="experience-item">
                     <div class="experience-content">
                         <div class="experience-header">
@@ -138,8 +178,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Experience 2 -->
                 <div class="experience-item">
                     <div class="experience-content">
                         <div class="experience-header">
@@ -169,8 +207,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Experience 3 -->
                 <div class="experience-item">
                     <div class="experience-content">
                         <div class="experience-header">
@@ -200,53 +236,86 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="projects" class="projects" aria-labelledby="projects-title">
         <div class="projects-container">
-            <h2 class="section-title">
-                <span class="number">03.</span> Projetos em Destaque
+            <h2 id="projects-title" class="section-title">
+                <span class="number" aria-hidden="true"></span> Projetos
             </h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
+                    <svg class="icon project-icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-cloud"></use></svg>
                     <h3 class="project-title">API de Clima</h3>
-                    <video src="assets/videos/Api_Clima.mp4" alt="API de Clima" autoplay muted loop></video>
+                    <video src="assets/videos/Api_Clima.mp4" aria-label="Demonstração do projeto API de Clima" muted loop playsinline class="project-preview" loading="lazy" preload="metadata" width="600" height="400" style="aspect-ratio:3/2"></video>
                     <p class="project-description">
                         Sistema de previsão do tempo com integração OpenStreetMap, WeatherAPI e Pexels. 
                         Interface 3D com Three.js e mapas interativos.
                     </p>
                     <div class="project-tech">
                         <div class="tech-icon">
-                            <img src="assets/icons/react-2.svg" alt="React" title="React">
+                            <img src="assets/icons/react-2.svg" alt="React" title="React" loading="lazy" width="40" height="40" decoding="async">
                         </div>
                         <div class="tech-icon">
-                            <img src="assets/icons/threejs.svg" alt="Three.js" title="Three.js">
+                            <img src="assets/icons/threejs.svg" alt="Three.js" title="Three.js" loading="lazy" width="40" height="40" decoding="async">
                         </div>
                         <div class="tech-icon">
-                            <img src="assets/icons/react-three-fiber.svg" alt="React Three Fiber" title="React Three Fiber">
+                            <img src="assets/icons/react-three-fiber.svg" alt="React Three Fiber" title="React Three Fiber" loading="lazy" width="40" height="40" decoding="async">
                         </div>
                         <div class="tech-icon">
-                            <img src="assets/icons/openstreetmap.svg" alt="OpenStreetMap" title="OpenStreetMap">
+                            <img src="assets/icons/openstreetmap.svg" alt="OpenStreetMap" title="OpenStreetMap" loading="lazy" width="40" height="40" decoding="async">
                         </div>
                         <div class="tech-icon">
-                            <img src="assets/icons/leaflet.svg" alt="Leaflet" title="Leaflet">
+                            <img src="assets/icons/leaflet.svg" alt="Leaflet" title="Leaflet" loading="lazy" width="40" height="40" decoding="async">
                         </div>
                         <div class="tech-icon">
-                            <img src="assets/icons/vite.svg" alt="Vite" title="Vite">
+                            <img src="assets/icons/vite.svg" alt="Vite" title="Vite" loading="lazy" width="40" height="40" decoding="async">
                         </div>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/AugustoAFS/API_CLIMA" target="_blank">
-                            <i class="fab fa-github"></i> GitHub
+                        <a href="https://github.com/AugustoAFS/API_CLIMA" target="_blank" rel="noopener noreferrer" aria-label="Ver código do projeto API de Clima no GitHub">
+                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-github"></use></svg> GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <svg class="icon project-icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-envelope"></use></svg>
+                    <h3 class="project-title">API Achados e Perdidos</h3>
+                    <img src="assets/images/achados-perdidos.png" alt="Imagem do projeto Achados e Perdidos" class="project-preview" loading="lazy" width="600" height="400" decoding="async">
+                    <p class="project-description">
+                        Api para criação do meu TCC chamado achados e perdidos foi criada para suprir uma necessidade do campus no qual estudei.
+                    </p>
+                    <div class="project-tech">
+                        <div class="tech-icon">
+                            <img src="assets/icons/java.svg" alt="Java" title="Java" loading="lazy" width="40" height="40" decoding="async">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/spring.svg" alt="Spring" title="Spring" loading="lazy" width="40" height="40" decoding="async">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/swagger.svg" alt="Swagger" title="Swagger" loading="lazy" width="40" height="40" decoding="async">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/onesignal.svg" alt="OneSignal" title="OneSignal" loading="lazy" width="40" height="40" decoding="async">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/websocket.svg" alt="WebSocket" title="WebSocket" loading="lazy" width="40" height="40" decoding="async">
+                        </div>
+                        <div class="tech-icon">
+                            <img src="assets/icons/caffeine.svg" alt="Caffeine" title="Caffeine" loading="lazy" width="40" height="40" decoding="async">
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/AugustoAFS/API-Achados-Perdidos-java-21" target="_blank" rel="noopener noreferrer" aria-label="Ver código do projeto Achados e Perdidos no GitHub">
+                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-github"></use></svg> GitHub
+                        </a>
+                        <a href="https://api-achadosperdidos.com.br/swagger-ui/index.html" target="_blank" rel="noopener noreferrer" aria-label="Acessar API Achados e Perdidos em produção">
+                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-external-link"></use></svg> API em PRD
+                        </a>
+                        <a href="APK/" download="achados-perdidos.apk" rel="noopener" aria-label="Baixar APK do aplicativo Achados e Perdidos" type="application/vnd.android.package-archive">
+                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-download"></use></svg> APK
                         </a>
                     </div>
                 </div>
@@ -254,44 +323,94 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" aria-labelledby="contact-title">
         <div class="contact-content">
-            <h2 class="section-title">
-                <span class="number">04.</span> Entre em contato
+            <h2 id="contact-title" class="section-title">
+                <span class="number" aria-hidden="true"></span> Entre em contato
             </h2>
-            <p class="contact-description">
-               Baixe meu currículo clicando no botão abaixo
-            </p>
-            <div class="contact-actions">
-                <a href="mailto:augusto.farias.2003@gmail.com" class="contact-button" target="_blank">
-                    <i class="fas fa-envelope"></i>
-                    Email
-                </a>
-                <a href="PDF/#" class="contact-button" target="_blank">
-                    <i class="fas fa-file-pdf"></i>
-                    Currículo
-                </a>
-                <a href="https://github.com/AugustoAFS" target="_blank" class="contact-button">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank" class="contact-button">
-                    <i class="fab fa-linkedin"></i>
-                    LinkedIn
-                </a>
+            <div class="contact-container">
+                <button class="contact-toggle-btn" aria-label="Abrir opções de contato" aria-expanded="false" type="button">
+                    <span class="toggle-icon">+</span>
+                    <span class="toggle-text">Conecte-se</span>
+                </button>
+                <div class="contact-actions">
+                    <a href="mailto:augusto.farias.2003@gmail.com" class="contact-button" aria-label="Enviar email para augusto.farias.2003@gmail.com">
+                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-envelope"></use></svg>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://github.com/AugustoAFS" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil do GitHub">
+                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-github"></use></svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil do LinkedIn">
+                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-linkedin"></use></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Baixar currículo em PDF">
+                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-file-pdf"></use></svg>
+                        <span>Currículo</span>
+                    </a>
+                    <a href="https://wa.me/5541998746656" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Abrir conversa no WhatsApp">
+                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-whatsapp"></use></svg>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
+    </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>Desenvolvido por Augusto Farias dos Santos</p>
-            <p>&copy; 2025 Augusto Farias dos Santos. Todos os direitos reservados.</p>
+    <footer role="contentinfo">
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <a href="#top" class="footer-logo" aria-label="Augusto Farias dos Santos - Voltar ao topo">AFS</a>
+                    <p>Desenvolvedor fullstack focado em criar plataformas escaláveis com .NET, Angular e SQL Server.</p>
+                </div>
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Navegação</h4>
+                        <nav aria-label="Navegação inferior">
+                            <ul class="footer-links">
+                                <li><a href="#about">Sobre</a></li>
+                                <li><a href="#experience">Experiência</a></li>
+                                <li><a href="#projects">Projetos</a></li>
+                                <li><a href="#contact">Contato</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Contato</h4>
+                        <ul class="footer-links">
+                            <li><a href="mailto:augusto.farias.2003@gmail.com">augusto.farias.2003@gmail.com</a></li>
+                            <li><a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://github.com/AugustoAFS" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Disponibilidade</h4>
+                        <ul class="footer-links">
+                            <li>Aceitando novos desafios</li>
+                            <li>Projetos remotos ou híbridos</li>
+                            <li>Curitiba • Brasil</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 - Augusto Farias dos Santos. Todos os direitos reservados.</p>
+                <a href="#top" class="footer-back-to-top" aria-label="Voltar para o topo da página">Voltar ao topo <svg class="icon" style="width:0.875em;height:0.875em" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-arrow-up"></use></svg></a>
+            </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/contact.js" defer></script>
+    <script src="js/canvas.js" defer></script>
+    
+    <!-- Service Worker para PWA -->
+    <script>
+        if('serviceWorker'in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js')})}
+    </script>
 </body>
 </html>

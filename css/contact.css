@@ -1,0 +1,286 @@
+/* Contact Section */
+#contact {
+    background-color: var(--night);
+    padding: 1rem 0;
+}
+
+.contact-content {
+    max-width: 64rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contact Container */
+.contact-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-container.expanded {
+    width: 350px;
+    height: 350px;
+}
+
+/* Toggle Button */
+.contact-toggle-btn {
+    background: linear-gradient(135deg, var(--electric-blue), var(--mint-green));
+    color: var(--night);
+    font-weight: 700;
+    font-size: 2rem;
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0, 191, 255, 0.4);
+    position: relative;
+    z-index: 10;
+}
+
+.contact-toggle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 191, 255, 0.6);
+}
+
+.contact-toggle-btn:active {
+    transform: scale(0.98);
+}
+
+.toggle-icon {
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+
+.contact-toggle-btn.active .toggle-icon {
+    transform: rotate(45deg);
+}
+
+.toggle-text {
+    display: none;
+}
+
+/* Contact Actions Container */
+.contact-actions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.contact-button {
+    background-color: var(--electric-blue);
+    color: var(--night);
+    font-weight: 600;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-size: 0.7rem;
+    position: absolute;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0, 191, 255, 0.3);
+    will-change: transform, opacity;
+}
+
+.contact-button i {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+.contact-button span {
+    font-size: 0.65rem;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* Posições dos botões em círculo (5 botões) */
+.contact-button:nth-child(1) {
+    top: 40%;
+}
+
+.contact-button:nth-child(2) {
+    top: 10%;
+    left: 30%;
+}
+
+.contact-button:nth-child(3) {
+    top: 10%;
+    left: 70%;
+}
+
+.contact-button:nth-child(5) {
+    top: 40%;
+    left: 100%;
+}
+
+/* Botões ativos */
+.contact-actions.active .contact-button {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.contact-actions.active .contact-button:nth-child(1) {
+    transform: translate(-50%, -50%) scale(1);
+    transition-delay: 0.1s;
+}
+
+.contact-actions.active .contact-button:nth-child(2) {
+    transform: translate(-50%, -50%) scale(1);
+    transition-delay: 0.2s;
+}
+
+.contact-actions.active .contact-button:nth-child(3) {
+    transform: translate(-50%, -50%) scale(1);
+    transition-delay: 0.3s;
+}
+
+.contact-actions.active .contact-button:nth-child(5) {
+    transform: translate(-50%, -50%) scale(1);
+    transition-delay: 0.5s;
+}
+
+.contact-button:hover {
+    background-color: var(--mint-green);
+    color: var(--night);
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 255, 200, 0.4);
+}
+
+/* Responsive */
+@media (min-width: 480px) {
+    .contact-container {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .contact-container.expanded {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .contact-toggle-btn {
+        width: 90px;
+        height: 90px;
+        font-size: 2.25rem;
+    }
+    
+    .toggle-icon {
+        font-size: 2.25rem;
+    }
+    
+    .contact-button {
+        width: 75px;
+        height: 75px;
+        font-size: 0.75rem;
+    }
+    
+    .contact-button i {
+        font-size: 1.625rem;
+    }
+    
+    .contact-button span {
+        font-size: 0.6875rem;
+    }
+}
+
+@media (min-width: 640px) {
+    .contact-container {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .contact-container.expanded {
+        width: 480px;
+        height: 480px;
+    }
+    
+    .contact-toggle-btn {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+    
+    .toggle-icon {
+        font-size: 2.5rem;
+    }
+    
+    .contact-button {
+        width: 85px;
+        height: 85px;
+        font-size: 0.8125rem;
+    }
+    
+    .contact-button i {
+        font-size: 1.75rem;
+    }
+    
+    .contact-button span {
+        font-size: 0.75rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .contact-container {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .contact-container.expanded {
+        width: 550px;
+        height: 550px;
+    }
+    
+    .contact-toggle-btn {
+        width: 110px;
+        height: 110px;
+        font-size: 2.75rem;
+    }
+    
+    .toggle-icon {
+        font-size: 2.75rem;
+    }
+    
+    .contact-button {
+        width: 95px;
+        height: 95px;
+        font-size: 0.875rem;
+    }
+    
+    .contact-button i {
+        font-size: 2rem;
+    }
+    
+    .contact-button span {
+        font-size: 0.8125rem;
+    }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://augustosantos.com.br/sitemap.xml
