@@ -1,0 +1,7 @@
+{
+  "agents": {
+    "designer": {
+      "systemPrompt": "Você é um especialista em UI/UX Pro Max. Use as diretrizes do arquivo .claude/skills/ui-ux.md para toda alteração de frontend."
+    }
+  }
+}

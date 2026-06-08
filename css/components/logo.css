@@ -1,0 +1,73 @@
+.nav-logo {
+  display: flex !important;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.nav-logo__wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1.4);
+  margin-right: 4px;
+}
+
+.nav-logo__dragon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-logo__dragon svg,
+.nav-logo__dragon canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-logo__dragon svg #body {
+  transform-origin: 250px 220px;
+  transform: scale(var(--body-scale, 1));
+}
+
+.nav-logo__dragon svg #head {
+  transform-origin: 250px 160px;
+  transform: translateY(var(--head-y, 0px));
+}
+
+.nav-logo__dragon svg #wing-left {
+  transform-origin: 230px 220px;
+  transform: rotate(var(--wing-rot-l, 0deg)) scale(var(--wing-scale, 0.8));
+}
+
+.nav-logo__dragon svg #wing-right {
+  transform-origin: 270px 220px;
+  transform: rotate(var(--wing-rot-r, 0deg)) scale(var(--wing-scale, 0.8));
+}
+
+.nav-logo__dragon svg #eyes {
+  opacity: var(--eye-opacity, 0.1);
+}
+
+.nav-logo__dragon svg .vein {
+  opacity: var(--vein-opacity, 0);
+  stroke-dasharray: 200;
+  stroke-dashoffset: calc(200 - (200 * var(--vein-opacity, 0)));
+}
+
+.nav-logo__dragon svg #tail-tip {
+  opacity: var(--tail-glow, 0.2);
+  transform-origin: 250px 480px;
+  transform: scale(calc(0.5 + var(--tail-glow, 0.2)));
+}
+
+.nav-logo__dragon svg #core-glow {
+  opacity: var(--breath-intensity, 0);
+}

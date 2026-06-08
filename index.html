@@ -1,416 +1,537 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="generator" content="HTML5">
-    <meta name="description" content="Augusto Farias dos Santos - Desenvolvedor Fullstack especializado em .NET e Angular. Transformando ideias em software escalável e soluções inovadoras.">
-    <meta name="keywords" content="desenvolvedor fullstack, .NET, Angular, desenvolvedor web, software, programador">
-    <meta name="author" content="Augusto Farias dos Santos">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="theme-color" content="#0a192f">
-    <meta name="color-scheme" content="dark">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="AFS Portfolio">
-    
-    <!-- Security (outros headers estão no .htaccess) -->
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Augusto Farias dos Santos - Developer">
-    <meta property="og:description" content="Desenvolvedor Fullstack focado em .NET e Angular. Transformando ideias em software escalável.">
-    <meta property="og:url" content="https://augustosantos.com.br/">
-    <meta property="og:image" content="https://augustosantos.com.br/assets/images/og-image.jpg">
-    <meta property="og:locale" content="pt_BR">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Augusto Farias dos Santos - Developer">
-    <meta name="twitter:description" content="Desenvolvedor Fullstack focado em .NET e Angular.">
-    <meta name="twitter:image" content="https://augustosantos.com.br/assets/images/og-image.jpg">
-    <link rel="canonical" href="https://augustosantos.com.br/">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="manifest" href="/manifest.json">
-    
-    <title>Augusto Farias dos Santos - Developer</title>
-    
-    <!-- Critical CSS Inline para Performance -->
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}:root{--night:#121212;--blue-main:#0a192fe6;--electric-blue:#00BFFF;--mint-green:#00FFC8;--gray-300:#d1d5db;--gray-400:#9ca3af}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#FFF;background:#121212;overflow-x:hidden}img,video{max-width:100%;height:auto;display:block}header{position:fixed;top:0;width:100%;background:var(--blue-main);z-index:50}nav{max-width:72rem;margin:0 auto;padding:.875rem 1rem}.nav-container{display:flex;justify-content:space-between;align-items:center}.logo{font-size:1.125rem;font-weight:600;color:var(--electric-blue);text-decoration:none}.nav-links{display:flex;list-style:none;gap:2rem}.nav-links a{color:#FFF;text-decoration:none;transition:color .3s}.nav-links a:hover{color:var(--electric-blue)}.mobile-menu-btn{color:var(--electric-blue);background:0 0;border:none;font-size:1.25rem;cursor:pointer}.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1rem 0}.hero-content{max-width:64rem;margin:0 auto;text-align:center}.hero-greeting{color:var(--mint-green);font-size:.75rem;margin-bottom:.75rem}.hero-title{font-size:2rem;font-weight:700;margin-bottom:1rem;line-height:1.2}.hero-title .highlight{color:var(--electric-blue)}.hero-subtitle{font-size:1.125rem;color:var(--gray-300);margin-bottom:1.5rem}.hero-subtitle .highlight{color:var(--electric-blue)}.hero-subtitle .highlight-green{color:var(--mint-green)}.hero-description{font-size:1rem;color:var(--gray-400);margin-bottom:2rem;max-width:32rem;margin-left:auto;margin-right:auto}.cta-button{display:inline-block;background:var(--electric-blue);color:var(--night);font-weight:600;padding:1rem 2rem;border-radius:.5rem;text-decoration:none;transition:all .3s}@media (min-width:480px){.hero-title{font-size:2.5rem}}
-    </style>
-    
-    
-    
-    <!-- Preload apenas CSS críticos -->
-    <link rel="preload" href="css/style.css" as="style">
-    <link rel="preload" href="css/header.css" as="style">
-    <link rel="preload" href="css/hero.css" as="style">
-    
-    <!-- CSS críticos -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/hero.css">
-    
-    <!-- CSS não-críticos - lazy loading -->
-    <link rel="stylesheet" href="css/about.css" media="print" onload="this.media='all';this.onload=null;">
-    <link rel="stylesheet" href="css/experience.css" media="print" onload="this.media='all';this.onload=null;">
-    <link rel="stylesheet" href="css/projects.css" media="print" onload="this.media='all';this.onload=null;">
-    <link rel="stylesheet" href="css/contact.css" media="print" onload="this.media='all';this.onload=null;">
-    <link rel="stylesheet" href="css/footer.css" media="print" onload="this.media='all';this.onload=null;">
-    
-    <noscript>
-        <link rel="stylesheet" href="css/about.css">
-        <link rel="stylesheet" href="css/experience.css">
-        <link rel="stylesheet" href="css/projects.css">
-        <link rel="stylesheet" href="css/contact.css">
-        <link rel="stylesheet" href="css/footer.css">
-    </noscript>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio de Augusto Farias dos Santos — Desenvolvedor Fullstack especializado em .NET Core, Angular e arquitetura limpa. Curitiba, Brasil.">
+  <meta name="author" content="Augusto Farias dos Santos">
+  <meta name="theme-color" content="#0B0C10">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Augusto Farias dos Santos — Desenvolvedor Fullstack">
+  <meta property="og:description" content="Desenvolvedor Fullstack especializado em .NET Core, Angular e arquitetura limpa. Veja meus projetos e experiência.">
+  <meta property="og:image" content="assets/images/profile.jpg">
+  <meta property="og:locale" content="pt_BR">
+
+  <title>AFS - Portfólio Dark Dragon</title>
+
+  <!-- DNS prefetch para domínios externos -->
+  <link rel="dns-prefetch" href="https://github.com">
+  <link rel="dns-prefetch" href="https://www.linkedin.com">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Preload da imagem LCP (maior elemento acima da dobra) -->
+  <link rel="preload" as="image" href="assets/images/profile.jpg">
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body id="top">
-    <!-- Skip Link para Acessibilidade -->
-    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
-    
-    <header>
-        <nav aria-label="Navegação principal">
-            <div class="nav-container">
-                <a href="#top" class="logo" aria-label="Augusto Farias dos Santos - Ir para o início">AFS</a>
-                <ul class="nav-menu nav-links">
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#experience">Experiência</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-                <button class="mobile-menu-btn" aria-label="Menu de navegação" aria-expanded="false" type="button">
-                    <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-bars"></use></svg>
-                </button>
-            </div>
-        </nav>
-    </header>
+  <header class="header js-header">
+    <nav class="nav l-container" aria-label="Navegação principal">
+      <a href="#top" class="nav-logo" aria-label="Augusto Farias dos Santos - Ir para o início">
+        <div class="nav-logo__wrapper">
+          <div id="dragon-container" class="nav-logo__dragon">
+            <svg id="dragon-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="obsidianDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#2A3644"/>
+                        <stop offset="100%" stop-color="#0B0C10"/>
+                    </linearGradient>
+                    <linearGradient id="obsidianLight" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#1F2833"/>
+                        <stop offset="100%" stop-color="#0B0C10"/>
+                    </linearGradient>
+                    <linearGradient id="wingMembrane" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#1F2833" stop-opacity="0.9"/>
+                        <stop offset="100%" stop-color="#0B0C10" stop-opacity="0.95"/>
+                    </linearGradient>
+                    <filter id="hyperGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="8" result="blur1" />
+                        <feGaussianBlur stdDeviation="4" result="blur2" />
+                        <feGaussianBlur stdDeviation="1" result="blur3" />
+                        <feMerge>
+                            <feMergeNode in="blur1" />
+                            <feMergeNode in="blur2" />
+                            <feMergeNode in="blur3" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <g id="spikes">
+                    <path d="M 250 170 L 260 180 L 250 190 L 240 180 Z" fill="#FF416C" opacity="0.4" filter="url(#softGlow)"/>
+                    <path d="M 250 190 L 265 205 L 250 220 L 235 205 Z" fill="#FF4B2B" opacity="0.3" filter="url(#softGlow)"/>
+                    <path d="M 250 215 L 265 235 L 250 255 L 235 235 Z" fill="#EB5757" opacity="0.2" filter="url(#softGlow)"/>
+                    <path d="M 250 245 L 260 265 L 250 285 L 240 265 Z" fill="#FF4B2B" opacity="0.1"/>
+                </g>
+                <g id="wing-left">
+                    <path d="M 230 220 L 150 100 L 50 80 L 90 140 L 30 200 L 100 230 L 50 300 L 130 280 L 180 320 L 200 270 Z" fill="url(#wingMembrane)" stroke="#0B0C10" stroke-width="1.5" stroke-linejoin="bevel"/>
+                    <path d="M 230 220 L 150 100 L 50 80" fill="none" stroke="#2A3644" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <path d="M 150 100 L 30 200" fill="none" stroke="#1F2833" stroke-width="3"/>
+                    <path d="M 125 125 L 50 300" fill="none" stroke="#1F2833" stroke-width="2"/>
+                    <path d="M 160 200 L 180 320" fill="none" stroke="#1F2833" stroke-width="2"/>
+                    <g class="vein" filter="url(#hyperGlow)">
+                        <path d="M 210 215 L 150 110 L 60 90 M 130 145 L 90 150 L 40 190 M 115 210 L 90 240 L 60 290" fill="none" stroke="#FF416C" stroke-width="2"/>
+                    </g>
+                </g>
+                <g id="wing-right">
+                    <path d="M 270 220 L 350 100 L 450 80 L 410 140 L 470 200 L 400 230 L 450 300 L 370 280 L 320 320 L 300 270 Z" fill="url(#wingMembrane)" stroke="#0B0C10" stroke-width="1.5" stroke-linejoin="bevel"/>
+                    <path d="M 270 220 L 350 100 L 450 80" fill="none" stroke="#2A3644" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <path d="M 350 100 L 470 200" fill="none" stroke="#1F2833" stroke-width="3"/>
+                    <path d="M 375 125 L 450 300" fill="none" stroke="#1F2833" stroke-width="2"/>
+                    <path d="M 340 200 L 320 320" fill="none" stroke="#1F2833" stroke-width="2"/>
+                    <g class="vein" filter="url(#hyperGlow)">
+                        <path d="M 290 215 L 350 110 L 440 90 M 370 145 L 410 150 L 460 190 M 385 210 L 410 240 L 440 290" fill="none" stroke="#FF416C" stroke-width="2"/>
+                    </g>
+                </g>
+                <g id="body">
+                    <path d="M 230 320 L 270 320 L 260 400 L 250 480 L 240 400 Z" fill="url(#obsidianDark)"/>
+                    <path d="M 235 340 L 265 340 L 250 370 Z" fill="#1F2833"/>
+                    <path d="M 240 370 L 260 370 L 250 400 Z" fill="#2A3644"/>
+                    <path d="M 245 400 L 255 400 L 250 430 Z" fill="#0B0C10"/>
+                    <circle id="core-glow" cx="250" cy="220" r="30" fill="#FF416C" filter="url(#hyperGlow)"/>
+                    <path d="M 250 170 L 290 220 L 270 320 L 250 340 L 230 320 L 210 220 Z" fill="url(#obsidianDark)" stroke="#0B0C10" stroke-width="2" stroke-linejoin="bevel"/>
+                    <path d="M 250 170 L 280 210 L 250 240 L 220 210 Z" fill="#2A3644"/>
+                    <path d="M 250 240 L 275 270 L 250 290 L 225 270 Z" fill="#1F2833"/>
+                    <path d="M 250 290 L 265 310 L 250 330 L 235 310 Z" fill="#0B0C10"/>
+                    <path d="M 250 170 L 250 330" fill="none" stroke="#FF416C" stroke-width="1" opacity="0.3" filter="url(#softGlow)"/>
+                    <polygon id=\"tail-tip\" points=\"250,470 256,480 250,490 244,480\" fill=\"#FF4B2B\" filter=\"url(#hyperGlow)\"/>
+                </g>
+                <g id="head">
+                    <path d="M 230 170 L 270 170 L 260 200 L 250 230 L 240 200 Z" fill="#1F2833"/>
+                    <path d="M 240 170 L 260 170 L 250 210 Z" fill="#2A3644"/> 
+                    <path d="M 235 150 L 265 150 L 280 180 L 265 210 L 250 240 L 235 210 L 220 180 Z" fill="#0B0C10"/>
+                    <path d="M 230 140 L 270 140 L 280 180 L 250 210 L 220 180 Z" fill="url(#obsidianLight)"/>
+                    <path d="M 245 150 L 255 150 L 260 220 L 250 245 L 240 220 Z" fill="#2A3644"/>
+                    <path d="M 250 150 L 255 220 L 250 245 L 245 220 Z" fill="#1F2833"/>
+                    <path d="M 230 140 L 205 70 L 195 90 L 220 150 Z" fill="#0B0C10" />
+                    <path d="M 230 140 L 205 70 L 215 80 L 225 140 Z" fill="#1F2833" />
+                    <path d="M 270 140 L 295 70 L 305 90 L 280 150 Z" fill="#0B0C10" />
+                    <path d="M 270 140 L 295 70 L 285 80 L 275 140 Z" fill="#1F2833" />
+                    <path d="M 245 150 L 220 125 L 210 150 L 235 170 Z" fill="#1F2833"/>
+                    <path d="M 255 150 L 280 125 L 290 150 L 265 170 Z" fill="#1F2833"/>
+                    <g id="eyes">
+                        <polygon points="220,165 238,158 245,170 230,172" fill="#FF416C" filter="url(#hyperGlow)"/>
+                        <polygon points="280,165 262,158 255,170 270,172" fill="#FF416C" filter="url(#hyperGlow)"/>
+                        <circle cx="236" cy="165" r="2" fill="#FFF"/>
+                        <circle cx="264" cy="165" r="2" fill="#FFF"/>
+                    </g>
+                </g>
+            </svg>
+            <canvas id="fx-canvas"></canvas>
+          </div>
+        </div>
+        <span>A<span>FS</span></span>
+      </a>
 
-    <main id="main-content">
-    <section class="hero">
-        <div class="hero-content">
-            <p class="hero-greeting">Olá, meu nome é</p>
-            <h1 class="hero-title">
-                <span>Augusto Farias</span>
-                <span class="highlight">dos Santos</span>
-            </h1>
-            <h2 class="hero-subtitle">
-                Desenvolvedor Fullstack focado em 
-                <span class="highlight">.NET</span> e 
-                <span class="highlight-green">Angular</span>
-            </h2>
-            <p class="hero-description">
-                Transformando ideias em software escalável e soluções inovadoras.
-            </p>
-            <a href="#projects" class="cta-button" aria-label="Ver meus projetos desenvolvidos">
-                Ver Projetos
+      <ul class="nav-list js-nav-list">
+        <li class="nav-item"><a href="#about" class="nav-link js-nav-link">Sobre</a></li>
+        <li class="nav-item"><a href="#experience" class="nav-link js-nav-link">Experiência</a></li>
+        <li class="nav-item"><a href="#projects" class="nav-link js-nav-link">Projetos</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link js-nav-link">Contato</a></li>
+      </ul>
+
+      <button class="theme-toggle js-theme-toggle" aria-label="Ativar modo claro" aria-pressed="false" type="button">
+        <!-- Sol: visível em dark mode -->
+        <svg class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- Lua: visível em light mode -->
+        <svg class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <button class="nav-toggle js-nav-toggle" aria-label="Menu de navegação" aria-expanded="false" type="button">
+        <svg class="nav-toggle-icon" aria-hidden="true">
+          <use href="assets/icons/sprite.svg#icon-bars"></use>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero l-section">
+      <div class="hero-content l-container js-animate">
+
+        <div class="hero-text-container">
+          <p class="hero-greeting" aria-hidden="true">Olá, eu sou</p>
+          <h1 class="hero-title" style="visibility: hidden;">
+            Augusto <span class="hero-title--highlight">Santos</span>
+          </h1>
+          <p class="hero-description" style="visibility: hidden;">
+            Desenvolvedor Fullstack | .NET | Angular
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn js-nav-link" aria-label="Ver meus projetos desenvolvidos">
+              Desvendar Projetos
             </a>
+            <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" target="_blank" class="btn btn--outline"
+              aria-label="Download Currículo">
+              Currículo
+            </a>
+          </div>
         </div>
+
+        <div class="hero-image-container">
+          <div class="profile-container hero-profile">
+            <img src="assets/images/profile.jpg" alt="Foto de Augusto Farias dos Santos" width="300"
+              height="300" decoding="async" fetchpriority="high">
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <section id="about" class="about" aria-labelledby="about-title">
-        <div class="section-container">
-            <h2 id="about-title" class="section-title">
-                <span class="number" aria-hidden="true"></span> Sobre Mim
-            </h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        Olá! Sou Augusto, um desenvolvedor fullstack. 
-                        Minha jornada na programação começou com C# e .NET, e desde então venho expandindo meus conhecimentos 
-                        para o ecossistema completo de desenvolvimento web.
-                    </p>
-                    <p>
-                        Atualmente, foco em tecnologias como <span class="highlight">C#</span>, 
-                        <span class="highlight">.NET Core</span>, <span class="highlight-green">Angular</span>, 
-                        e <span class="highlight-purple">SQL Server</span>.
-                    </p>
-                    <p>
-                        Estou sempre em busca de novos desafios e oportunidades para aplicar minhas habilidades. Vamos construir algo incrível juntos!
-                    </p>
-                </div>
-                <div class="about-image">
-                    <div class="profile-container">
-                        <img src="assets/images/profile.jpg" alt="Foto de Augusto Farias dos Santos" loading="lazy" width="300" height="300" decoding="async" importance="low" style="aspect-ratio:1/1">
-                    </div>
-                </div>
-            </div>
+    <section id="about" class="l-section" aria-labelledby="about-title">
+      <div class="l-container js-animate">
+        <h2 id="about-title" class="section-title section-title--centered">
+          <span class="section-title-number" aria-hidden="true">I.</span> Sobre Mim
+        </h2>
+        <div class="about-content about-content--centered">
+          <div class="about-text">
+            <p>
+              Desenvolvedor <span class="highlight">Fullstack</span> com foco em <span class="highlight">.NET Core</span> e <span class="highlight">Angular</span>,
+              apaixonado por construir sistemas que resolvem problemas reais — desde APIs robustas até interfaces que as pessoas realmente gostam de usar.
+            </p>
+            <p>
+              Trabalho com arquiteturas limpas, metodologias ágeis e sempre com o olho na <span class="highlight-green">performance</span> e na <span class="highlight-green">experiência do usuário</span>.
+              Atualmente no <span class="highlight">Trabalha Brasil</span>, onde desenvolvo soluções backend com DDD e CI/CD.
+            </p>
+            <p>
+              Fora do trabalho, exploro projetos pessoais que misturam backend sólido com frontends modernos —
+              como você pode ver abaixo.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section id="experience" aria-labelledby="experience-title">
-        <div class="section-container">
-            <h2 id="experience-title" class="section-title">
-                <span class="number" aria-hidden="true"></span> Experiência
-            </h2>
-            <div class="experience-list">
-                <div class="experience-item">
-                    <div class="experience-content">
-                        <div class="experience-header">
-                            <h3 class="experience-title">Desenvolvedor Backend C#</h3>
-                            <p class="experience-company">Trabalha Brasil</p>
-                            <p class="experience-period">2025 - Presente</p>
-                        </div>
-                        <div class="experience-description">
-                            <ul class="experience-list">
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Desenvolvimento do produto Trabalha Brasil com C# e .NET Core
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Arquitetura DDD
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Metodologia Ágil Scrum
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Otimização de performance e implementação de práticas de CI/CD
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-content">
-                        <div class="experience-header">
-                            <h3 class="experience-title">Desenvolvedor Fullstack</h3>
-                            <p class="experience-company">BNE - Banco Nacional de Empregos</p>
-                            <p class="experience-period">2024 - 2025</p>
-                        </div>
-                        <div class="experience-description">
-                            <ul class="experience-list">
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Desenvolvimento de aplicações web com Angular e ASP.NET Core
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Criação de Api's robustas e escaláveis
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Arquitetura limpa e Código limpo
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Participação em projetos ágeis com Scrum
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-content">
-                        <div class="experience-header">
-                            <h3 class="experience-title">Auxiliar de desenvolvimento</h3>
-                            <p class="experience-company">Projeto IFBLOG - IFPR Campus Colombo</p>
-                            <p class="experience-period">2023 - 2024</p>
-                        </div>
-                        <div class="experience-description">
-                            <ul class="experience-list">
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Desenvolvimento de sistemas Web com PHP e MySQL
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Produto focado em juntar todos os TCC's do IFPR Campus Colombo
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Desenvolvimento de um Monolito com PHP, MySQL, Bootstrap, JavaScript e HTML
-                                </li>
-                                <li>
-                                    <span class="bullet">▹</span>
-                                    Participação em projetos ágeis com Scrum
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+    <section id="experience" class="l-section" aria-labelledby="experience-title">
+      <div class="l-container">
+        <h2 id="experience-title" class="section-title section-title--centered js-animate">
+          Experiência
+        </h2>
+        <div class="experience-list-container">
+
+          <article class="experience-item js-animate">
+            <div class="experience-header">
+              <h3 class="experience-title">Desenvolvedor Backend C#</h3>
+              <p class="experience-company">Trabalha Brasil</p>
+              <p class="experience-period">2025 - Presente</p>
             </div>
+            <div class="experience-description">
+              <ul class="experience-details">
+                <li>Desenvolvimento do produto Trabalha Brasil com C# e .NET Core</li>
+                <li>Arquitetura DDD</li>
+                <li>Metodologia Ágil Scrum</li>
+                <li>Otimização de performance e implementação de práticas de CI/CD</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="experience-item js-animate">
+            <div class="experience-header">
+              <h3 class="experience-title">Desenvolvedor Fullstack</h3>
+              <p class="experience-company">BNE - Banco Nacional de Empregos</p>
+              <p class="experience-period">2024 - 2025</p>
+            </div>
+            <div class="experience-description">
+              <ul class="experience-details">
+                <li>Desenvolvimento de aplicações web com Angular e ASP.NET Core</li>
+                <li>Criação de APIs robustas e escaláveis</li>
+                <li>Arquitetura limpa e Código limpo</li>
+                <li>Participação em projetos ágeis com Scrum</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="experience-item js-animate">
+            <div class="experience-header">
+              <h3 class="experience-title">Auxiliar de desenvolvimento</h3>
+              <p class="experience-company">Projeto IFBLOG - IFPR Campus Colombo</p>
+              <p class="experience-period">2023 - 2024</p>
+            </div>
+            <div class="experience-description">
+              <ul class="experience-details">
+                <li>Desenvolvimento de sistemas Web com PHP e MySQL</li>
+                <li>Produto focado em juntar todos os TCC's do IFPR Campus Colombo</li>
+                <li>Desenvolvimento de um Monolito iterativo com PHP, JS e HTML</li>
+                <li>Participação em projetos ágeis com Scrum</li>
+              </ul>
+            </div>
+          </article>
+
         </div>
+      </div>
     </section>
 
-    <section id="projects" class="projects" aria-labelledby="projects-title">
-        <div class="projects-container">
-            <h2 id="projects-title" class="section-title">
-                <span class="number" aria-hidden="true"></span> Projetos
-            </h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <svg class="icon project-icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-cloud"></use></svg>
-                    <h3 class="project-title">API de Clima</h3>
-                    <video src="assets/videos/Api_Clima.mp4" aria-label="Demonstração do projeto API de Clima" muted loop playsinline class="project-preview" loading="lazy" preload="metadata" width="600" height="400" style="aspect-ratio:3/2"></video>
-                    <p class="project-description">
-                        Sistema de previsão do tempo com integração OpenStreetMap, WeatherAPI e Pexels. 
-                        Interface 3D com Three.js e mapas interativos.
-                    </p>
-                    <div class="project-tech">
-                        <div class="tech-icon">
-                            <img src="assets/icons/react-2.svg" alt="React" title="React" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/threejs.svg" alt="Three.js" title="Three.js" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/react-three-fiber.svg" alt="React Three Fiber" title="React Three Fiber" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/openstreetmap.svg" alt="OpenStreetMap" title="OpenStreetMap" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/leaflet.svg" alt="Leaflet" title="Leaflet" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/vite.svg" alt="Vite" title="Vite" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/AugustoAFS/API_CLIMA" target="_blank" rel="noopener noreferrer" aria-label="Ver código do projeto API de Clima no GitHub">
-                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-github"></use></svg> GitHub
-                        </a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <svg class="icon project-icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-envelope"></use></svg>
-                    <h3 class="project-title">API Achados e Perdidos</h3>
-                    <img src="assets/images/achados-perdidos.png" alt="Imagem do projeto Achados e Perdidos" class="project-preview" loading="lazy" width="600" height="400" decoding="async">
-                    <p class="project-description">
-                        Api para criação do meu TCC chamado achados e perdidos foi criada para suprir uma necessidade do campus no qual estudei.
-                    </p>
-                    <div class="project-tech">
-                        <div class="tech-icon">
-                            <img src="assets/icons/java.svg" alt="Java" title="Java" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/spring.svg" alt="Spring" title="Spring" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/swagger.svg" alt="Swagger" title="Swagger" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/onesignal.svg" alt="OneSignal" title="OneSignal" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/websocket.svg" alt="WebSocket" title="WebSocket" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                        <div class="tech-icon">
-                            <img src="assets/icons/caffeine.svg" alt="Caffeine" title="Caffeine" loading="lazy" width="40" height="40" decoding="async">
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/AugustoAFS/API-Achados-Perdidos-java-21" target="_blank" rel="noopener noreferrer" aria-label="Ver código do projeto Achados e Perdidos no GitHub">
-                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-github"></use></svg> GitHub
-                        </a>
-                        <a href="https://api-achadosperdidos.com.br/swagger-ui/index.html" target="_blank" rel="noopener noreferrer" aria-label="Acessar API Achados e Perdidos em produção">
-                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-external-link"></use></svg> API em PRD
-                        </a>
-                        <a href="APK/" download="achados-perdidos.apk" rel="noopener" aria-label="Baixar APK do aplicativo Achados e Perdidos" type="application/vnd.android.package-archive">
-                            <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-download"></use></svg> APK
-                        </a>
-                    </div>
-                </div>
+    <section id="projects" class="l-section" aria-labelledby="projects-title">
+      <div class="l-container">
+        <h2 id="projects-title" class="section-title js-animate">
+          <span class="section-title-number" aria-hidden="true">III.</span> Projetos Forjados
+        </h2>
+
+        <h3 class="projects-category-title js-animate">Projetos Back-end</h3>
+        <div class="l-grid l-grid--columns-2">
+
+          <article class="card js-animate">
+            <h3 class="card-title">API de Gestão de Inventário</h3>
+            <div class="card-preview card-preview--placeholder" aria-hidden="true">
+              <span class="card-preview__endpoint card-preview__endpoint--post">POST /api/v1/auth/login</span>
+              <span class="card-preview__endpoint card-preview__endpoint--get">GET  /api/v1/product?page=1</span>
+              <span class="card-preview__endpoint card-preview__endpoint--put">PUT  /api/v1/product/{id}</span>
+              <span class="card-preview__endpoint card-preview__endpoint--del">DEL  /api/v1/product/{id}</span>
+              <span class="card-preview__endpoint card-preview__endpoint--get">GET  /api/v2/category</span>
             </div>
+            <p class="card-description">
+              API REST de gestão de inventário com autenticação JWT e hash Argon2, cache distribuído com Redis,
+              versionamento de API (v1/v2) e autorização por roles. Arquitetura em camadas com Repository Pattern,
+              FluentValidation, mapeamento source-generated via Mapperly e documentação Scalar.
+              Containerizada com Docker e coberta por testes unitários.
+            </p>
+            <div class="card-tech">
+              <div class="tech-box"><img src="assets/icons/Logo_C_sharp.svg" alt="C#" title="C#" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/dotnetcore.svg" alt=".NET Core" title=".NET Core" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/sqlserver.svg" alt="SQL Server" title="SQL Server" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/redis.svg" alt="Redis" title="Redis" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/docker.svg" alt="Docker" title="Docker" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/AugustoAFS/Inventory-Management" target="_blank" rel="noopener noreferrer" class="card-link">
+                <svg class="card-link-icon" aria-hidden="true">
+                  <use href="assets/icons/sprite.svg#icon-github"></use>
+                </svg> GitHub
+              </a>
+            </div>
+          </article>
+
+          <article class="card js-animate">
+            <h3 class="card-title">API Achados e Perdidos</h3>
+            <img src="assets/images/achados-perdidos.png" alt="Imagem do projeto Achados e Perdidos"
+              class="card-preview" loading="lazy" width="600" height="400" decoding="async">
+            <p class="card-description">
+              API REST desenvolvida para o TCC "Achados e Perdidos" do IFPR — resolve um problema real do campus:
+              centralizar objetos perdidos e encontrados. Em produção, com app Android e documentação Swagger.
+            </p>
+            <div class="card-tech">
+              <div class="tech-box"><img src="assets/icons/java.svg" alt="Java" title="Java" class="card-tech-icon"
+                  loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/spring.svg" alt="Spring" title="Spring"
+                  class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/swagger.svg" alt="Swagger" title="Swagger"
+                  class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/AugustoAFS/API-Achados-Perdidos-java-21" target="_blank"
+                rel="noopener noreferrer" class="card-link">
+                <svg class="card-link-icon" aria-hidden="true">
+                  <use href="assets/icons/sprite.svg#icon-github"></use>
+                </svg> GitHub
+              </a>
+              <a href="https://api-achadosperdidos.com.br/swagger-ui/index.html" target="_blank"
+                rel="noopener noreferrer" class="card-link">
+                <svg class="card-link-icon" aria-hidden="true">
+                  <use href="assets/icons/sprite.svg#icon-external-link"></use>
+                </svg> API em PRD
+              </a>
+              <a href="APK/" download="achados-perdidos.apk" rel="noopener" class="card-link"
+                type="application/vnd.android.package-archive">
+                <svg class="card-link-icon" aria-hidden="true">
+                  <use href="assets/icons/sprite.svg#icon-download"></use>
+                </svg> APK
+              </a>
+            </div>
+          </article>
+
         </div>
+
+        <h3 class="projects-category-title js-animate">Projetos Front-end</h3>
+        <div class="l-grid l-grid--columns-2">
+
+          <article class="card js-animate">
+            <h3 class="card-title">Dashboard de Gestão de Inventário</h3>
+            <div class="card-preview card-preview--placeholder" aria-hidden="true">
+              <span class="card-preview__endpoint card-preview__endpoint--get">/login            → AuthGuard</span>
+              <span class="card-preview__endpoint card-preview__endpoint--get">/home             → Dashboard</span>
+              <span class="card-preview__endpoint card-preview__endpoint--post">/adm/product      → CRUD tabela</span>
+              <span class="card-preview__endpoint card-preview__endpoint--put">/adm/categories   → CRUD tabela</span>
+              <span class="card-preview__endpoint card-preview__endpoint--del">/adm/users        → RoleGuard</span>
+            </div>
+            <p class="card-description">
+              Frontend Angular 21 com SSR para o sistema de inventário — painel administrativo com CRUD completo
+              de produtos, categorias, usuários e roles. Autenticação JWT com interceptor HTTP, guards de rota por role
+              e comunicação com a API REST via RxJS. Containerizado com Docker.
+            </p>
+            <div class="card-tech">
+              <div class="tech-box"><img src="assets/icons/angular.svg" alt="Angular" title="Angular" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/typescript.svg" alt="TypeScript" title="TypeScript" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/docker.svg" alt="Docker" title="Docker" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/AugustoAFS/Inventory-Management" target="_blank" rel="noopener noreferrer" class="card-link">
+                <svg class="card-link-icon" aria-hidden="true">
+                  <use href="assets/icons/sprite.svg#icon-github"></use>
+                </svg> GitHub
+              </a>
+            </div>
+          </article>
+
+          <article class="card js-animate">
+            <h3 class="card-title">API de Clima</h3>
+            <video src="assets/videos/Api_Clima.mp4" aria-label="Demonstração do projeto API de Clima" muted loop
+              playsinline class="card-preview" preload="metadata" width="600" height="400"></video>
+            <p class="card-description">
+              Previsão do tempo com busca por cidade, mapas interativos via OpenStreetMap, backgrounds dinâmicos
+              da Pexels e uma cena 3D interativa com Three.js e React Three Fiber.
+            </p>
+            <div class="card-tech">
+              <div class="tech-box"><img src="assets/icons/react-2.svg" alt="React" title="React" class="card-tech-icon"
+                  loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/threejs.svg" alt="Three.js" title="Three.js"
+                  class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/react-three-fiber.svg" alt="React Three Fiber"
+                  title="React Three Fiber" class="card-tech-icon" loading="lazy" width="20" height="20"></div>
+              <div class="tech-box"><img src="assets/icons/vite.svg" alt="Vite" title="Vite" class="card-tech-icon"
+                  loading="lazy" width="20" height="20"></div>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/AugustoAFS/API_CLIMA" target="_blank" rel="noopener noreferrer"
+                class="card-link" aria-label="Ver código do projeto API de Clima no GitHub">
+                <svg class="card-link-icon" aria-hidden="true">
+                  <use href="assets/icons/sprite.svg#icon-github"></use>
+                </svg> GitHub
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
     </section>
 
-    <section id="contact" aria-labelledby="contact-title">
-        <div class="contact-content">
-            <h2 id="contact-title" class="section-title">
-                <span class="number" aria-hidden="true"></span> Entre em contato
-            </h2>
-            <div class="contact-container">
-                <button class="contact-toggle-btn" aria-label="Abrir opções de contato" aria-expanded="false" type="button">
-                    <span class="toggle-icon">+</span>
-                    <span class="toggle-text">Conecte-se</span>
-                </button>
-                <div class="contact-actions">
-                    <a href="mailto:augusto.farias.2003@gmail.com" class="contact-button" aria-label="Enviar email para augusto.farias.2003@gmail.com">
-                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-envelope"></use></svg>
-                        <span>Email</span>
-                    </a>
-                    <a href="https://github.com/AugustoAFS" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil do GitHub">
-                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-github"></use></svg>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil do LinkedIn">
-                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-linkedin"></use></svg>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Baixar currículo em PDF">
-                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-file-pdf"></use></svg>
-                        <span>Currículo</span>
-                    </a>
-                    <a href="https://wa.me/5541998746656" class="contact-button" target="_blank" rel="noopener noreferrer" aria-label="Abrir conversa no WhatsApp">
-                        <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-whatsapp"></use></svg>
-                        <span>WhatsApp</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    </main>
+  </main>
 
-    <footer role="contentinfo">
-        <div class="footer">
-            <div class="footer-inner">
-                <div class="footer-brand">
-                    <a href="#top" class="footer-logo" aria-label="Augusto Farias dos Santos - Voltar ao topo">AFS</a>
-                    <p>Desenvolvedor fullstack focado em criar plataformas escaláveis com .NET, Angular e SQL Server.</p>
-                </div>
-                <div class="footer-columns">
-                    <div class="footer-column">
-                        <h4 class="footer-heading">Navegação</h4>
-                        <nav aria-label="Navegação inferior">
-                            <ul class="footer-links">
-                                <li><a href="#about">Sobre</a></li>
-                                <li><a href="#experience">Experiência</a></li>
-                                <li><a href="#projects">Projetos</a></li>
-                                <li><a href="#contact">Contato</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-heading">Contato</h4>
-                        <ul class="footer-links">
-                            <li><a href="mailto:augusto.farias.2003@gmail.com">augusto.farias.2003@gmail.com</a></li>
-                            <li><a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                            <li><a href="https://github.com/AugustoAFS" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-heading">Disponibilidade</h4>
-                        <ul class="footer-links">
-                            <li>Aceitando novos desafios</li>
-                            <li>Projetos remotos ou híbridos</li>
-                            <li>Curitiba • Brasil</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 - Augusto Farias dos Santos. Todos os direitos reservados.</p>
-                <a href="#top" class="footer-back-to-top" aria-label="Voltar para o topo da página">Voltar ao topo <svg class="icon" style="width:0.875em;height:0.875em" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-arrow-up"></use></svg></a>
-            </div>
+  <section id="contact" class="l-section" aria-labelledby="contact-title">
+    <div class="l-container">
+      <h2 id="contact-title" class="section-title js-animate">
+        <span class="section-title-number" aria-hidden="true">IV.</span> Contato
+      </h2>
+      <div class="contact-content js-animate">
+        <p class="contact-subtitle">Clique no botão abaixo para ver meus contatos</p>
+        <div class="contact-container js-contact-container">
+          <button class="contact-toggle-btn js-contact-toggle" aria-label="Abrir contatos">
+            <span class="toggle-icon">+</span>
+          </button>
+          <div class="contact-actions js-contact-actions">
+            <a href="mailto:augusto.farias.2003@gmail.com" class="contact-button">
+              <span>Email</span>
+            </a>
+            <a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank" rel="noopener noreferrer"
+              class="contact-button">
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://github.com/AugustoAFS" target="_blank" rel="noopener noreferrer" class="contact-button">
+              <svg aria-hidden="true">
+                <use href="assets/icons/sprite.svg#icon-github"></use>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a href="https://wa.me/5541998746656" target="_blank" rel="noopener noreferrer" class="contact-button">
+              <span>WhatsApp</span>
+            </a>
+            <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" target="_blank" rel="noopener noreferrer"
+              class="contact-button">
+              <span>Currículo</span>
+            </a>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script src="js/main.js" defer></script>
-    <script src="js/contact.js" defer></script>
-    <script src="js/canvas.js" defer></script>
-    
-    <!-- Service Worker para PWA -->
-    <script>
-        if('serviceWorker'in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js')})}
-    </script>
+  <footer class="footer" role="contentinfo">
+    <div class="l-container js-animate">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#top" class="footer-logo nav-logo js-nav-link" aria-label="Augusto Farias dos Santos - Voltar ao topo">
+            <div class="nav-logo__wrapper">
+              <!-- Reutilização do SVG limpa -->
+              <div class="nav-logo__dragon js-dragon-logo"></div>
+            </div>
+            <span>A<span>FS</span></span>
+          </a>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navegação</h4>
+          <nav aria-label="Navegação inferior">
+            <ul class="footer-list">
+              <li><a href="#about" class="footer-link js-nav-link">Sobre</a></li>
+              <li><a href="#experience" class="footer-link js-nav-link">Experiência</a></li>
+              <li><a href="#projects" class="footer-link js-nav-link">Projetos</a></li>
+              <li><a href="#contact" class="footer-link js-nav-link">Contato</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Contato</h4>
+          <ul class="footer-list">
+            <li><a href="mailto:augusto.farias.2003@gmail.com" class="footer-link">augusto.farias.2003@gmail.com</a>
+            </li>
+            <li><a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank"
+                rel="noopener noreferrer" class="footer-link">LinkedIn</a></li>
+            <li><a href="https://github.com/AugustoAFS" target="_blank" rel="noopener noreferrer"
+                class="footer-link">GitHub</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Disponibilidade</h4>
+          <ul class="footer-list">
+            <li class="footer-text-item">Aceitando novos desafios</li>
+            <li class="footer-text-item">Projetos remotos ou híbridos</li>
+            <li class="footer-text-item">Curitiba • Brasil</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 - Augusto Farias dos Santos. Todos os direitos reservados.</p>
+        <a href="#top" class="footer-back-up js-nav-link" aria-label="Voltar para o topo da página">
+          Voltar ao topo
+          <svg class="footer-back-icon" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

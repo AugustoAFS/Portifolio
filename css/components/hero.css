@@ -1,0 +1,202 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 5rem; /* Compensa a navbar fixa */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 65% 45%, rgba(255, 65, 108, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 70%, rgba(235, 87, 87, 0.05) 0%, transparent 45%);
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 1;
+  animation: fadeIn var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
+}
+
+.hero-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--spacing-md);
+}
+
+@media (min-width: 992px) {
+  .hero-content {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: 4rem;
+  }
+
+  .hero-text-container {
+    align-items: flex-start;
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+  }
+
+  .hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.hero-greeting {
+  font-size: 1.2rem;
+  color: var(--color-primary-base);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-title {
+  font-family: var(--font-family-title);
+  font-size: clamp(1.8rem, 8vw, 5rem);
+  line-height: 1.1;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-main);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+/* Em telas pequenas, permite quebra de linha */
+@media (max-width: 480px) {
+  .hero-title {
+    white-space: normal;
+    font-size: clamp(1.6rem, 9vw, 2.8rem);
+  }
+}
+
+.hero-title--highlight {
+  background: linear-gradient(135deg, var(--color-primary-warm), var(--color-primary-base));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  color: var(--color-text-muted);
+  font-weight: 400;
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-description {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 0 var(--spacing-xl) 0;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: transparent;
+  color: var(--color-primary-base);
+  border: 2px solid var(--color-primary-base);
+  border-radius: var(--border-radius-sm);
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-primary-warm), var(--color-primary-base));
+  z-index: -1;
+  transition: transform var(--transition-normal);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.btn:hover,
+.btn:focus {
+  color: var(--color-text-main);
+  border-color: transparent;
+  box-shadow: var(--shadow-dragon);
+  transform: translateY(-2px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary-base);
+  outline-offset: 4px;
+}
+
+.btn:hover::before,
+.btn:focus::before {
+  transform: scaleX(1);
+}
+
+.btn--outline {
+  border: 2px solid var(--color-bg-surface-light);
+  color: var(--color-text-main);
+  background: transparent;
+}
+
+.btn--outline::before {
+  background: var(--color-bg-surface-light);
+}
+
+.btn--outline:hover,
+.btn--outline:focus {
+  border-color: var(--color-bg-surface-light);
+  color: var(--color-text-main);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

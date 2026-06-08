@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\augus\\\\OneDrive\\\\Desktop\" | Where-Object { $_.Name -match \"invent|front|web|angular|react\" } | Format-Table Name)"
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Transição suave ao trocar de tema — :where() zera a especificidade
+   para nunca sobrescrever transitions de componentes */
+:where(html[data-theme]) * {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-main);
+  font-family: var(--font-family-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Estado inicial de elementos animados via JS */
+.js-animate {
+  transition: opacity var(--duration-animation) var(--timing-animation),
+              transform var(--duration-animation) var(--timing-animation);
+}
+
+/* Scrollbar customizada (Webkit) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-surface-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-base);
+}
