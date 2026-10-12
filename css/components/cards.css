@@ -1,7 +1,6 @@
 .projects-category-title {
-  font-family: var(--font-family-base);
   font-size: 1.5rem;
-  color: var(--color-primary-base);
+  color: var(--color-primary-ink);
   margin-bottom: var(--spacing-lg);
   margin-top: var(--spacing-lg);
   text-align: center;
@@ -12,30 +11,24 @@
   margin-top: var(--spacing-xxl);
 }
 
-.l-grid:has(.card:hover) .card:not(:hover) {
-  filter: blur(3px) brightness(0.7);
-  transform: scale(0.95);
-  opacity: 0.6;
-}
-
 .card {
   background: linear-gradient(135deg, var(--color-bg-surface) 0%, var(--color-bg-deep) 100%);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-sm);
   border: 1px solid var(--color-bg-surface-light);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-slow);
+  transition-property: transform, box-shadow, border-color;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   contain: layout style paint;
-  will-change: transform;
   max-width: 420px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* Linha gradiente de topo que aparece no hover */
+/* Linha de fogo no topo que desliza no hover */
 .card::after {
   content: '';
   position: absolute;
@@ -43,9 +36,9 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--color-primary-warm), var(--color-primary-base));
+  background: var(--gradient-fire);
   transform: scaleX(0);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--transition-slow);
   transform-origin: left;
 }
 
@@ -55,18 +48,16 @@
 
 .card:hover {
   transform: scale(1.02) translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 65, 108, 0.08);
-  border-color: rgba(255, 65, 108, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--color-glow-faint);
+  border-color: var(--color-glow);
   z-index: 10;
 }
 
 .card-title {
-  font-family: var(--font-family-base);
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-text-main);
   margin-bottom: var(--spacing-sm);
-  margin-top: 0;
   padding: 0 var(--spacing-xs);
 }
 
@@ -83,7 +74,7 @@
 
 .card-description {
   color: var(--color-text-muted);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin-bottom: var(--spacing-md);
   flex-grow: 1;
   line-height: 1.5;
@@ -109,14 +100,15 @@
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-bg-surface-light);
   border-radius: var(--border-radius-sm);
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
+  transition-property: transform, border-color, box-shadow;
   cursor: default;
 }
 
 .tech-box:hover {
   transform: translateY(-2px);
   border-color: var(--color-primary-base);
-  box-shadow: 0 4px 12px rgba(255, 65, 108, 0.2);
+  box-shadow: 0 4px 12px var(--color-glow-soft);
 }
 
 .card-tech-icon {
@@ -124,7 +116,7 @@
   height: 16px;
   object-fit: contain;
   filter: brightness(0.9);
-  transition: all 0.3s ease;
+  transition: filter var(--transition-normal);
 }
 
 .tech-box:hover .card-tech-icon {
@@ -141,7 +133,7 @@
 }
 
 .card-link {
-  color: var(--color-primary-base);
+  color: var(--color-primary-ink);
   font-size: 0.85rem;
   font-weight: 500;
   display: inline-flex;
@@ -150,7 +142,7 @@
 }
 
 .card-link:hover {
-  color: var(--color-primary-warm);
+  color: var(--color-warm-ink);
 }
 
 .card-link-icon {
@@ -159,6 +151,7 @@
   fill: currentColor;
 }
 
+/* Prévia "janela de código" (cards sem imagem) */
 .card-preview--placeholder {
   display: flex;
   flex-direction: column;
@@ -166,7 +159,7 @@
   justify-content: center;
   gap: 0.6rem;
   padding: 0 var(--spacing-lg);
-  background: linear-gradient(135deg, #0d1117 0%, var(--color-bg-surface) 100%);
+  background: linear-gradient(135deg, var(--color-code-bg-start) 0%, var(--color-code-bg-end) 100%);
 }
 
 .card-preview__endpoint {

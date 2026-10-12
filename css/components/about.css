@@ -1,3 +1,4 @@
+/* Título de seção (I–IV): número + texto + linha de brilho até a borda */
 .section-title {
     font-family: var(--font-family-title);
     font-size: clamp(2rem, 4vw, 3rem);
@@ -13,39 +14,22 @@
     flex-grow: 1;
     height: 1px;
     margin-left: var(--spacing-md);
-    background: linear-gradient(to right, rgba(255, 65, 108, 0.5), transparent);
+    background: linear-gradient(to right, var(--color-glow-line), transparent);
 }
 
 .section-title-number {
-    color: var(--color-primary-base);
+    color: var(--color-primary-ink);
     font-size: 1.5rem;
     font-family: var(--font-family-base);
 }
 
-.section-title--centered {
-    justify-content: center;
-    text-align: center;
-}
-
-.section-title--centered::after {
-    display: none;
-}
-
-.about {
-    background-color: transparent;
-}
-
+/* Texto corrido alinhado à esquerda, com linhas de ~70 caracteres para facilitar a leitura */
 .about-content {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
     align-items: center;
-}
-
-.about-content--centered {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    max-width: 72ch;
 }
 
 .about-text {
@@ -60,26 +44,15 @@
     line-height: 1.75;
 }
 
-.about-text .highlight,
-.about-highlight {
-    color: var(--color-primary-base);
+.about-text .highlight {
+    color: var(--color-primary-ink);
 }
 
 .about-text .highlight-green {
-    color: var(--color-primary-warm);
+    color: var(--color-warm-ink);
 }
 
-.about-text .highlight-purple {
-    color: var(--color-accent-gold);
-}
-
-.about-image {
-    display: flex;
-    justify-content: center;
-    border-radius: 50%;
-    width: 100%;
-}
-
+/* Foto do hero */
 .profile-container {
     width: clamp(15rem, 60vw, 25rem);
     height: clamp(15rem, 60vw, 25rem);
@@ -87,12 +60,17 @@
     overflow: hidden;
     margin: 0 auto;
     border: 3px solid var(--color-primary-base);
-    box-shadow: 0 0 25px rgba(255, 65, 108, 0.4);
+    box-shadow: var(--shadow-glow-md);
     transition: box-shadow var(--transition-normal);
 }
 
 .profile-container:hover {
-    box-shadow: 0 0 40px rgba(255, 65, 108, 0.6);
+    box-shadow: var(--shadow-glow-lg);
+}
+
+/* <picture> não gera caixa própria: o <img> se comporta como filho direto do container */
+.profile-container picture {
+    display: contents;
 }
 
 .profile-container img {

@@ -5,6 +5,7 @@
   position: relative;
 }
 
+/* Linha de brilho sobre a borda do topo */
 .footer::before {
   content: '';
   position: absolute;
@@ -12,7 +13,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(255, 65, 108, 0.5), transparent);
+  background: linear-gradient(to right, transparent, var(--color-glow-line), transparent);
 }
 
 .footer-grid {
@@ -21,7 +22,14 @@
   margin-bottom: var(--spacing-xl);
 }
 
-@media (min-width: 768px) {
+/* 4 colunas só a partir de 1024px: em 768px elas não cabiam e o e-mail estourava a tela */
+@media (min-width: 640px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
   .footer-grid {
     grid-template-columns: 2fr 1fr 1.5fr 1.5fr;
   }
@@ -31,29 +39,20 @@
   max-width: 380px;
 }
 
+/* Variação do .nav-logo (logo.css) para o footer */
 .footer-logo {
   font-family: var(--font-family-base);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-primary-base);
+  color: var(--color-primary-ink);
   margin-bottom: var(--spacing-md);
-  display: inline-block;
   letter-spacing: 1px;
-}
-
-.footer-desc {
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
 }
 
 .footer-heading {
   color: var(--color-text-main);
   font-size: 0.9rem;
   margin-bottom: var(--spacing-lg);
-  font-family: var(--font-family-base);
-  text-transform: uppercase;
-  letter-spacing: 1px;
   font-weight: 600;
 }
 
@@ -67,19 +66,23 @@
 .footer-text-item {
   color: var(--color-text-muted);
   font-size: 0.9rem;
-  transition: color var(--transition-fast);
 }
 
-.footer-text-item {
-  cursor: default;
+/* O e-mail é longo: pode quebrar em vez de estourar a coluna */
+.footer-link {
+  overflow-wrap: anywhere;
 }
 
 .footer-link:hover {
   color: var(--color-text-main);
 }
 
+.footer-text-item {
+  cursor: default;
+}
+
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--color-divider);
   padding-top: var(--spacing-lg);
   display: flex;
   flex-direction: column;
@@ -106,16 +109,12 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  cursor: pointer;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-back-up:hover {
-  color: var(--color-primary-base);
+  color: var(--color-primary-ink);
   transform: translateY(-2px);
-}
-
-.footer-back-up {
-  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .footer-back-icon {

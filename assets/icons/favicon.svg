@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="25 55 450 450">
+  <defs>
+    <linearGradient id="fire" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF4B2B"/>
+      <stop offset="1" stop-color="#FF416C"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#fire)">
+    <path d="M230 220 150 100 50 80l40 60-60 60 70 30-50 70 80-20 50 40 20-50z"/>
+    <path d="M270 220 350 100l100-20-40 60 60 60-70 30 50 70-80-20-50 40-20-50z"/>
+    <path d="M250 170l40 50-20 100-20 20-20-20-20-100z"/>
+    <path d="M230 320h40l-10 80-10 80-10-80z"/>
+    <path d="M230 140h40l10 40-30 30-30-30z"/>
+    <path d="M230 140 205 70l-10 20 25 60zM270 140l25-70 10 20-25 60z"/>
+  </g>
+</svg>

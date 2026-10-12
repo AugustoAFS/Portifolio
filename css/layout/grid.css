@@ -36,9 +36,4 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .l-grid--columns-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
 }

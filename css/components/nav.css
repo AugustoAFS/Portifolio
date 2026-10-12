@@ -11,9 +11,11 @@
   z-index: 1000;
   border: 1px solid var(--color-header-border);
   border-radius: 40px;
-  transition: all var(--transition-normal);
+  transition: var(--transition-normal);
+  transition-property: background-color, box-shadow, border-color, padding;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   padding: 0.25rem 2rem;
+  anchor-name: --header;
 }
 
 @media (min-width: 768px) {
@@ -28,7 +30,26 @@
   }
 }
 
+/* Estado do header após rolar a página */
+.header--scrolled {
+  background-color: var(--color-header-bg-scrolled);
+  box-shadow: var(--color-header-shadow-scrolled);
+  border-color: var(--color-header-border-scrolled);
+  padding: 0rem 1.5rem;
+}
+
+/* Marcador invisível a 50px do topo: o nav.js observa quando ele sai da tela (header--scrolled) */
+.header-sentinel {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
 .nav {
+  position: relative; /* referência do canvas de faíscas */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,31 +58,30 @@
   width: auto;
 }
 
-.nav-logo {
-  font-family: var(--font-family-title);
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: var(--color-text-main);
-  letter-spacing: 2px;
+/* Celulares estreitos (< 375px): o espaçamento padrão não cabe no header */
+@media (max-width: 374px) {
+  .nav {
+    gap: var(--spacing-xl);
+  }
 }
 
-.nav-logo span {
-  color: var(--color-primary-base);
-}
-
+/* Menu: no celular é um popover nativo (abre pelo botão; Escape e clique fora fecham sem JS).
+   .nav-list--open é o fallback para navegadores sem Popover API */
 .nav-list {
   display: none;
 }
 
-/* Menu mobile aberto */
-.nav-list--open {
+.nav-list:is(:popover-open, .nav-list--open) {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  width: 100%;
+  position: fixed;
+  inset: calc(var(--spacing-sm) * 2 + 3.625rem) var(--spacing-md) auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  color: inherit;
   background: var(--color-menu-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -69,52 +89,50 @@
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-lg);
   z-index: 999;
-  animation: navSlideDown 0.2s ease-out;
+  --slide-from: -8px;
+  animation: fade-slide-in 0.2s ease-out;
 }
 
-@keyframes navSlideDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Com ancoragem CSS nativa, o menu acompanha exatamente a posição e a largura do header */
+@supports (anchor-name: --header) {
+  .nav-list:is(:popover-open, .nav-list--open) {
+    position-anchor: --header;
+    top: calc(anchor(bottom) + var(--spacing-sm));
+    left: anchor(left);
+    right: anchor(right);
+  }
 }
 
+/* Desktop: menu sempre em linha (desfaz o estilo padrão de popover do navegador) */
 @media (min-width: 768px) {
   .nav-list {
     display: flex;
     gap: var(--spacing-lg);
-  }
-  .nav-list--open {
     position: static;
-    flex-direction: row;
-    background: transparent;
-    backdrop-filter: none;
-    border: none;
+    inset: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
     padding: 0;
-    animation: none;
+    border: 0;
+    overflow: visible;
+    color: inherit;
+    background: none;
   }
-}
-
-.nav-item {
-  position: relative;
 }
 
 .nav-link {
   font-size: 0.9rem;
   color: var(--color-text-main);
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   padding: var(--spacing-xs) 0;
   opacity: 0.8;
   transition: opacity var(--transition-fast), color var(--transition-fast);
 }
 
-.nav-link:hover,
-.nav-link--active {
-  color: var(--color-text-main);
+.nav-link:hover {
   opacity: 1;
 }
-
-
 
 .nav-toggle {
   display: block;
@@ -122,6 +140,7 @@
   height: 24px;
   position: relative;
   z-index: 1001;
+  flex-shrink: 0;
 }
 
 @media (min-width: 768px) {
@@ -136,35 +155,19 @@
   fill: var(--color-text-main);
 }
 
-/* Estado do header após rolar a página */
-.header--scrolled {
-  background-color: var(--color-header-bg-scrolled);
-  box-shadow: var(--color-header-shadow-scrolled);
-  border-color: var(--color-header-border-scrolled);
-  padding: 0rem 1.5rem;
-}
-
 /* Botão de tema (dark/light toggle) */
 .theme-toggle {
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
   color: var(--color-text-muted);
   transition: color var(--transition-fast), background-color var(--transition-fast);
   flex-shrink: 0;
 }
 
 .theme-toggle:hover {
-  color: var(--color-primary-base);
-  background-color: rgba(255, 65, 108, 0.08);
-}
-
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--color-primary-base);
-  outline-offset: 2px;
+  color: var(--color-primary-ink);
+  background-color: var(--color-glow-faint);
 }
 
 .theme-toggle-icon {

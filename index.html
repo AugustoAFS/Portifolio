@@ -4,42 +4,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Augusto Farias dos Santos — Desenvolvedor Fullstack .NET e Angular</title>
   <meta name="description" content="Portfólio de Augusto Farias dos Santos — Desenvolvedor Fullstack especializado em .NET Core, Angular e arquitetura limpa. Curitiba, Brasil.">
   <meta name="author" content="Augusto Farias dos Santos">
   <meta name="theme-color" content="#0B0C10">
+  <link rel="canonical" href="https://augustosantos.com.br/">
 
-  <!-- Open Graph -->
+  <!-- Ícones -->
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+  <!-- Open Graph (URLs absolutas: LinkedIn e WhatsApp não resolvem caminhos relativos) -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://augustosantos.com.br/">
   <meta property="og:title" content="Augusto Farias dos Santos — Desenvolvedor Fullstack">
   <meta property="og:description" content="Desenvolvedor Fullstack especializado em .NET Core, Angular e arquitetura limpa. Veja meus projetos e experiência.">
-  <meta property="og:image" content="assets/images/profile.jpg">
+  <meta property="og:image" content="https://augustosantos.com.br/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Augusto Santos — Desenvolvedor Fullstack .NET e Angular">
   <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <title>AFS - Portfólio Dark Dragon</title>
+  <!-- Antes da primeira pintura: marca que o JS está ativo (.js) e aplica o tema salvo
+       ou o do sistema, sem flash do tema errado -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var theme = null;
+      root.classList.add('js');
+      try { theme = localStorage.getItem('afs-theme'); } catch (e) {}
+      if (theme !== 'dark' && theme !== 'light') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      root.setAttribute('data-theme', theme);
+    })();
+  </script>
 
   <!-- DNS prefetch para domínios externos -->
   <link rel="dns-prefetch" href="https://github.com">
   <link rel="dns-prefetch" href="https://www.linkedin.com">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <!-- Recursos acima da dobra: fontes e a foto do hero (LCP) -->
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/images/profile.webp" as="image" type="image/webp" fetchpriority="high">
 
-  <!-- Preload da imagem LCP (maior elemento acima da dobra) -->
-  <link rel="preload" as="image" href="assets/images/profile.jpg">
+  <!-- Um <link> por arquivo: baixam em paralelo (@import encadeava as requisições) -->
+  <link rel="stylesheet" href="css/base/fonts.css">
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/patterns.css">
+  <link rel="stylesheet" href="css/layout/grid.css">
+  <link rel="stylesheet" href="css/components/nav.css">
+  <link rel="stylesheet" href="css/components/logo.css">
+  <link rel="stylesheet" href="css/components/hero.css">
+  <link rel="stylesheet" href="css/components/about.css">
+  <link rel="stylesheet" href="css/components/experience.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/contact.css">
+  <link rel="stylesheet" href="css/components/footer.css">
 
-  <link rel="stylesheet" href="css/style.css">
+  <!-- JS: módulos são adiados por padrão (rodam com o HTML pronto). O modulepreload baixa os
+       essenciais em paralelo com o main.js; o resto o main.js carrega sob demanda -->
+  <link rel="modulepreload" href="js/core/env.js">
+  <link rel="modulepreload" href="js/core/lazy.js">
+  <link rel="modulepreload" href="js/core/storage.js">
+  <link rel="modulepreload" href="js/modules/theme.js">
+  <link rel="modulepreload" href="js/modules/nav.js">
+  <link rel="modulepreload" href="js/modules/typing.js">
+  <link rel="modulepreload" href="js/modules/reveal.js">
+  <script type="module" src="js/main.js"></script>
 </head>
 
 <body id="top">
   <header class="header js-header">
     <nav class="nav l-container" aria-label="Navegação principal">
-      <a href="#top" class="nav-logo" aria-label="Augusto Farias dos Santos - Ir para o início">
+      <a href="#top" class="nav-logo" aria-label="AFS — Augusto Farias dos Santos, ir para o início">
         <div class="nav-logo__wrapper">
-          <div id="dragon-container" class="nav-logo__dragon">
-            <svg id="dragon-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <div class="nav-logo__dragon js-dragon">
+            <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                 <defs>
                     <linearGradient id="obsidianDark" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stop-color="#2A3644"/>
@@ -72,13 +116,13 @@
                         </feMerge>
                     </filter>
                 </defs>
-                <g id="spikes">
+                <g class="dragon-spikes">
                     <path d="M 250 170 L 260 180 L 250 190 L 240 180 Z" fill="#FF416C" opacity="0.4" filter="url(#softGlow)"/>
                     <path d="M 250 190 L 265 205 L 250 220 L 235 205 Z" fill="#FF4B2B" opacity="0.3" filter="url(#softGlow)"/>
                     <path d="M 250 215 L 265 235 L 250 255 L 235 235 Z" fill="#EB5757" opacity="0.2" filter="url(#softGlow)"/>
                     <path d="M 250 245 L 260 265 L 250 285 L 240 265 Z" fill="#FF4B2B" opacity="0.1"/>
                 </g>
-                <g id="wing-left">
+                <g class="dragon-wing-left">
                     <path d="M 230 220 L 150 100 L 50 80 L 90 140 L 30 200 L 100 230 L 50 300 L 130 280 L 180 320 L 200 270 Z" fill="url(#wingMembrane)" stroke="#0B0C10" stroke-width="1.5" stroke-linejoin="bevel"/>
                     <path d="M 230 220 L 150 100 L 50 80" fill="none" stroke="#2A3644" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
                     <path d="M 150 100 L 30 200" fill="none" stroke="#1F2833" stroke-width="3"/>
@@ -88,7 +132,7 @@
                         <path d="M 210 215 L 150 110 L 60 90 M 130 145 L 90 150 L 40 190 M 115 210 L 90 240 L 60 290" fill="none" stroke="#FF416C" stroke-width="2"/>
                     </g>
                 </g>
-                <g id="wing-right">
+                <g class="dragon-wing-right">
                     <path d="M 270 220 L 350 100 L 450 80 L 410 140 L 470 200 L 400 230 L 450 300 L 370 280 L 320 320 L 300 270 Z" fill="url(#wingMembrane)" stroke="#0B0C10" stroke-width="1.5" stroke-linejoin="bevel"/>
                     <path d="M 270 220 L 350 100 L 450 80" fill="none" stroke="#2A3644" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
                     <path d="M 350 100 L 470 200" fill="none" stroke="#1F2833" stroke-width="3"/>
@@ -98,20 +142,20 @@
                         <path d="M 290 215 L 350 110 L 440 90 M 370 145 L 410 150 L 460 190 M 385 210 L 410 240 L 440 290" fill="none" stroke="#FF416C" stroke-width="2"/>
                     </g>
                 </g>
-                <g id="body">
+                <g class="dragon-body">
                     <path d="M 230 320 L 270 320 L 260 400 L 250 480 L 240 400 Z" fill="url(#obsidianDark)"/>
                     <path d="M 235 340 L 265 340 L 250 370 Z" fill="#1F2833"/>
                     <path d="M 240 370 L 260 370 L 250 400 Z" fill="#2A3644"/>
                     <path d="M 245 400 L 255 400 L 250 430 Z" fill="#0B0C10"/>
-                    <circle id="core-glow" cx="250" cy="220" r="30" fill="#FF416C" filter="url(#hyperGlow)"/>
+                    <circle class="dragon-core-glow" cx="250" cy="220" r="30" fill="#FF416C" filter="url(#hyperGlow)"/>
                     <path d="M 250 170 L 290 220 L 270 320 L 250 340 L 230 320 L 210 220 Z" fill="url(#obsidianDark)" stroke="#0B0C10" stroke-width="2" stroke-linejoin="bevel"/>
                     <path d="M 250 170 L 280 210 L 250 240 L 220 210 Z" fill="#2A3644"/>
                     <path d="M 250 240 L 275 270 L 250 290 L 225 270 Z" fill="#1F2833"/>
                     <path d="M 250 290 L 265 310 L 250 330 L 235 310 Z" fill="#0B0C10"/>
                     <path d="M 250 170 L 250 330" fill="none" stroke="#FF416C" stroke-width="1" opacity="0.3" filter="url(#softGlow)"/>
-                    <polygon id=\"tail-tip\" points=\"250,470 256,480 250,490 244,480\" fill=\"#FF4B2B\" filter=\"url(#hyperGlow)\"/>
+                    <polygon class="dragon-tail-tip" points="250,470 256,480 250,490 244,480" fill="#FF4B2B" filter="url(#hyperGlow)"/>
                 </g>
-                <g id="head">
+                <g class="dragon-head">
                     <path d="M 230 170 L 270 170 L 260 200 L 250 230 L 240 200 Z" fill="#1F2833"/>
                     <path d="M 240 170 L 260 170 L 250 210 Z" fill="#2A3644"/> 
                     <path d="M 235 150 L 265 150 L 280 180 L 265 210 L 250 240 L 235 210 L 220 180 Z" fill="#0B0C10"/>
@@ -124,7 +168,7 @@
                     <path d="M 270 140 L 295 70 L 285 80 L 275 140 Z" fill="#1F2833" />
                     <path d="M 245 150 L 220 125 L 210 150 L 235 170 Z" fill="#1F2833"/>
                     <path d="M 255 150 L 280 125 L 290 150 L 265 170 Z" fill="#1F2833"/>
-                    <g id="eyes">
+                    <g class="dragon-eyes">
                         <polygon points="220,165 238,158 245,170 230,172" fill="#FF416C" filter="url(#hyperGlow)"/>
                         <polygon points="280,165 262,158 255,170 270,172" fill="#FF416C" filter="url(#hyperGlow)"/>
                         <circle cx="236" cy="165" r="2" fill="#FFF"/>
@@ -132,20 +176,20 @@
                     </g>
                 </g>
             </svg>
-            <canvas id="fx-canvas"></canvas>
+            <canvas></canvas>
           </div>
         </div>
         <span>A<span>FS</span></span>
       </a>
 
-      <ul class="nav-list js-nav-list">
+      <ul id="nav-menu" class="nav-list js-nav-list" popover>
         <li class="nav-item"><a href="#about" class="nav-link js-nav-link">Sobre</a></li>
         <li class="nav-item"><a href="#experience" class="nav-link js-nav-link">Experiência</a></li>
         <li class="nav-item"><a href="#projects" class="nav-link js-nav-link">Projetos</a></li>
         <li class="nav-item"><a href="#contact" class="nav-link js-nav-link">Contato</a></li>
       </ul>
 
-      <button class="theme-toggle js-theme-toggle" aria-label="Ativar modo claro" aria-pressed="false" type="button">
+      <button class="theme-toggle js-theme-toggle" aria-label="Ativar modo claro" type="button">
         <!-- Sol: visível em dark mode -->
         <svg class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"/>
@@ -164,7 +208,7 @@
         </svg>
       </button>
 
-      <button class="nav-toggle js-nav-toggle" aria-label="Menu de navegação" aria-expanded="false" type="button">
+      <button class="nav-toggle js-nav-toggle" popovertarget="nav-menu" aria-label="Menu de navegação" type="button">
         <svg class="nav-toggle-icon" aria-hidden="true">
           <use href="assets/icons/sprite.svg#icon-bars"></use>
         </svg>
@@ -174,22 +218,22 @@
 
   <main id="main-content">
     <section class="hero l-section">
-      <div class="hero-content l-container js-animate">
+      <div class="hero-content l-container">
 
         <div class="hero-text-container">
           <p class="hero-greeting" aria-hidden="true">Olá, eu sou</p>
-          <h1 class="hero-title" style="visibility: hidden;">
+          <h1 class="hero-title">
             Augusto <span class="hero-title--highlight">Santos</span>
           </h1>
-          <p class="hero-description" style="visibility: hidden;">
+          <p class="hero-description">
             Desenvolvedor Fullstack | .NET | Angular
           </p>
           <div class="hero-actions">
-            <a href="#projects" class="btn js-nav-link" aria-label="Ver meus projetos desenvolvidos">
+            <a href="#projects" class="btn js-nav-link">
               Desvendar Projetos
             </a>
-            <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" target="_blank" class="btn btn--outline"
-              aria-label="Download Currículo">
+            <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" target="_blank" rel="noopener" class="btn btn--outline"
+              aria-label="Currículo (PDF, abre em nova aba)">
               Currículo
             </a>
           </div>
@@ -197,8 +241,11 @@
 
         <div class="hero-image-container">
           <div class="profile-container hero-profile">
-            <img src="assets/images/profile.jpg" alt="Foto de Augusto Farias dos Santos" width="300"
-              height="300" decoding="async" fetchpriority="high">
+            <picture>
+              <source srcset="assets/images/profile.webp" type="image/webp">
+              <img src="assets/images/profile.jpg" alt="Foto de Augusto Farias dos Santos" width="640"
+                height="640" decoding="async" fetchpriority="high">
+            </picture>
           </div>
         </div>
 
@@ -207,10 +254,10 @@
 
     <section id="about" class="l-section" aria-labelledby="about-title">
       <div class="l-container js-animate">
-        <h2 id="about-title" class="section-title section-title--centered">
+        <h2 id="about-title" class="section-title">
           <span class="section-title-number" aria-hidden="true">I.</span> Sobre Mim
         </h2>
-        <div class="about-content about-content--centered">
+        <div class="about-content">
           <div class="about-text">
             <p>
               Desenvolvedor <span class="highlight">Fullstack</span> com foco em <span class="highlight">.NET Core</span> e <span class="highlight">Angular</span>,
@@ -231,8 +278,8 @@
 
     <section id="experience" class="l-section" aria-labelledby="experience-title">
       <div class="l-container">
-        <h2 id="experience-title" class="section-title section-title--centered js-animate">
-          Experiência
+        <h2 id="experience-title" class="section-title js-animate">
+          <span class="section-title-number" aria-hidden="true">II.</span> Experiência
         </h2>
         <div class="experience-list-container">
 
@@ -298,7 +345,7 @@
         <div class="l-grid l-grid--columns-2">
 
           <article class="card js-animate">
-            <h3 class="card-title">API de Gestão de Inventário</h3>
+            <h4 class="card-title">API de Gestão de Inventário</h4>
             <div class="card-preview card-preview--placeholder" aria-hidden="true">
               <span class="card-preview__endpoint card-preview__endpoint--post">POST /api/v1/auth/login</span>
               <span class="card-preview__endpoint card-preview__endpoint--get">GET  /api/v1/product?page=1</span>
@@ -329,7 +376,7 @@
           </article>
 
           <article class="card js-animate">
-            <h3 class="card-title">API Achados e Perdidos</h3>
+            <h4 class="card-title">API Achados e Perdidos</h4>
             <img src="assets/images/achados-perdidos.png" alt="Imagem do projeto Achados e Perdidos"
               class="card-preview" loading="lazy" width="600" height="400" decoding="async">
             <p class="card-description">
@@ -357,12 +404,6 @@
                   <use href="assets/icons/sprite.svg#icon-external-link"></use>
                 </svg> API em PRD
               </a>
-              <a href="APK/" download="achados-perdidos.apk" rel="noopener" class="card-link"
-                type="application/vnd.android.package-archive">
-                <svg class="card-link-icon" aria-hidden="true">
-                  <use href="assets/icons/sprite.svg#icon-download"></use>
-                </svg> APK
-              </a>
             </div>
           </article>
 
@@ -372,7 +413,7 @@
         <div class="l-grid l-grid--columns-2">
 
           <article class="card js-animate">
-            <h3 class="card-title">Dashboard de Gestão de Inventário</h3>
+            <h4 class="card-title">Dashboard de Gestão de Inventário</h4>
             <div class="card-preview card-preview--placeholder" aria-hidden="true">
               <span class="card-preview__endpoint card-preview__endpoint--get">/login            → AuthGuard</span>
               <span class="card-preview__endpoint card-preview__endpoint--get">/home             → Dashboard</span>
@@ -400,9 +441,10 @@
           </article>
 
           <article class="card js-animate">
-            <h3 class="card-title">API de Clima</h3>
-            <video src="assets/videos/Api_Clima.mp4" aria-label="Demonstração do projeto API de Clima" muted loop
-              playsinline class="card-preview" preload="metadata" width="600" height="400"></video>
+            <h4 class="card-title">API de Clima</h4>
+            <video src="assets/videos/Api_Clima.mp4" poster="assets/images/api-clima-poster.webp"
+              aria-label="Demonstração do projeto API de Clima" muted loop playsinline controls
+              class="card-preview" preload="none" width="960" height="540"></video>
             <p class="card-description">
               Previsão do tempo com busca por cidade, mapas interativos via OpenStreetMap, backgrounds dinâmicos
               da Pexels e uma cena 3D interativa com Three.js e React Three Fiber.
@@ -431,61 +473,62 @@
       </div>
     </section>
 
-  </main>
-
-  <section id="contact" class="l-section" aria-labelledby="contact-title">
-    <div class="l-container">
-      <h2 id="contact-title" class="section-title js-animate">
-        <span class="section-title-number" aria-hidden="true">IV.</span> Contato
-      </h2>
-      <div class="contact-content js-animate">
-        <p class="contact-subtitle">Clique no botão abaixo para ver meus contatos</p>
-        <div class="contact-container js-contact-container">
-          <button class="contact-toggle-btn js-contact-toggle" aria-label="Abrir contatos">
-            <span class="toggle-icon">+</span>
-          </button>
-          <div class="contact-actions js-contact-actions">
-            <a href="mailto:augusto.farias.2003@gmail.com" class="contact-button">
-              <span>Email</span>
-            </a>
-            <a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank" rel="noopener noreferrer"
-              class="contact-button">
-              <span>LinkedIn</span>
-            </a>
-            <a href="https://github.com/AugustoAFS" target="_blank" rel="noopener noreferrer" class="contact-button">
-              <svg aria-hidden="true">
-                <use href="assets/icons/sprite.svg#icon-github"></use>
-              </svg>
-              <span>GitHub</span>
-            </a>
-            <a href="https://wa.me/5541998746656" target="_blank" rel="noopener noreferrer" class="contact-button">
-              <span>WhatsApp</span>
-            </a>
-            <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" target="_blank" rel="noopener noreferrer"
-              class="contact-button">
-              <span>Currículo</span>
-            </a>
+    <section id="contact" class="contact l-section" aria-labelledby="contact-title">
+      <div class="l-container">
+        <h2 id="contact-title" class="section-title js-animate">
+          <span class="section-title-number" aria-hidden="true">IV.</span> Contato
+        </h2>
+        <div class="contact-content js-animate">
+          <p class="contact-subtitle">Escolha o canal que preferir para falar comigo</p>
+          <div class="contact-container js-contact-container">
+            <button class="contact-toggle-btn js-contact-toggle" type="button" aria-label="Contatos"
+              aria-controls="contact-actions" aria-expanded="false">
+              <span class="toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div id="contact-actions" class="contact-actions js-contact-actions">
+              <a href="mailto:augusto.farias.2003@gmail.com" class="contact-button">
+                <span>Email</span>
+              </a>
+              <a href="https://www.linkedin.com/in/augusto-farias-dos-santos/" target="_blank" rel="noopener noreferrer"
+                class="contact-button">
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/AugustoAFS" target="_blank" rel="noopener noreferrer" class="contact-button">
+                <svg aria-hidden="true">
+                  <use href="assets/icons/sprite.svg#icon-github"></use>
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a href="https://wa.me/5541998746656" target="_blank" rel="noopener noreferrer" class="contact-button">
+                <span>WhatsApp</span>
+              </a>
+              <a href="PDF/Curriculo-Augusto-Farias-dos-Santos.pdf" target="_blank" rel="noopener noreferrer"
+                class="contact-button">
+                <span>Currículo</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
 
   <footer class="footer" role="contentinfo">
     <div class="l-container js-animate">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#top" class="footer-logo nav-logo js-nav-link" aria-label="Augusto Farias dos Santos - Voltar ao topo">
+          <a href="#top" class="footer-logo nav-logo js-nav-link" aria-label="AFS — Augusto Farias dos Santos, voltar ao topo">
             <div class="nav-logo__wrapper">
               <!-- Reutilização do SVG limpa -->
-              <div class="nav-logo__dragon js-dragon-logo"></div>
+              <div class="nav-logo__dragon js-dragon"></div>
             </div>
             <span>A<span>FS</span></span>
           </a>
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-heading">Navegação</h4>
+          <h2 class="footer-heading">Navegação</h2>
           <nav aria-label="Navegação inferior">
             <ul class="footer-list">
               <li><a href="#about" class="footer-link js-nav-link">Sobre</a></li>
@@ -497,7 +540,7 @@
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-heading">Contato</h4>
+          <h2 class="footer-heading">Contato</h2>
           <ul class="footer-list">
             <li><a href="mailto:augusto.farias.2003@gmail.com" class="footer-link">augusto.farias.2003@gmail.com</a>
             </li>
@@ -509,7 +552,7 @@
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-heading">Disponibilidade</h4>
+          <h2 class="footer-heading">Disponibilidade</h2>
           <ul class="footer-list">
             <li class="footer-text-item">Aceitando novos desafios</li>
             <li class="footer-text-item">Projetos remotos ou híbridos</li>
@@ -520,7 +563,7 @@
 
       <div class="footer-bottom">
         <p class="footer-copy">&copy; 2026 - Augusto Farias dos Santos. Todos os direitos reservados.</p>
-        <a href="#top" class="footer-back-up js-nav-link" aria-label="Voltar para o topo da página">
+        <a href="#top" class="footer-back-up js-nav-link">
           Voltar ao topo
           <svg class="footer-back-icon" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -530,8 +573,6 @@
       </div>
     </div>
   </footer>
-
-  <script type="module" src="js/main.js"></script>
 </body>
 
 </html>

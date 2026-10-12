@@ -18,14 +18,14 @@
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 65% 45%, rgba(255, 65, 108, 0.09) 0%, transparent 55%),
-    radial-gradient(ellipse at 25% 70%, rgba(235, 87, 87, 0.05) 0%, transparent 45%);
+    radial-gradient(ellipse at 65% 45%, var(--color-glow-faint) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 70%, color-mix(in srgb, var(--color-primary-hot) 5%, transparent) 0%, transparent 45%);
 }
 
 .hero-content {
   text-align: center;
   z-index: 1;
-  animation: fadeIn var(--transition-normal);
+  animation: fade-slide-in var(--transition-normal);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,10 +54,12 @@
     gap: 4rem;
   }
 
+  /* min-width: 0 → a largura da coluna não depende do texto (a digitação não empurra a foto) */
   .hero-text-container {
     align-items: flex-start;
-    flex: 1;
-    max-width: 600px;
+    flex: 1.4;
+    max-width: 720px;
+    min-width: 0;
   }
 
   .hero-actions {
@@ -74,7 +76,7 @@
 
 .hero-greeting {
   font-size: 1.2rem;
-  color: var(--color-primary-base);
+  color: var(--color-primary-ink);
   margin-bottom: var(--spacing-sm);
   font-weight: 500;
   text-transform: uppercase;
@@ -87,7 +89,6 @@
   line-height: 1.1;
   margin-bottom: var(--spacing-md);
   color: var(--color-text-main);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
 }
 
@@ -99,19 +100,19 @@
   }
 }
 
+/* Layout em linha: o título precisa caber na coluna de texto sem invadir a foto */
+@media (min-width: 992px) {
+  .hero-title {
+    font-size: clamp(2.5rem, 5.4vw, 5rem);
+  }
+}
+
 .hero-title--highlight {
-  background: linear-gradient(135deg, var(--color-primary-warm), var(--color-primary-base));
+  background: var(--gradient-fire);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-}
-
-.hero-subtitle {
-  font-size: clamp(1.2rem, 3vw, 2rem);
-  color: var(--color-text-muted);
-  font-weight: 400;
-  margin-bottom: var(--spacing-lg);
 }
 
 .hero-description {
@@ -122,20 +123,60 @@
   color: var(--color-text-muted);
 }
 
+/* Com JS, o texto do hero espera o efeito de digitação (typing.js adiciona .is-revealed).
+   Failsafe: se o JS falhar, o texto aparece sozinho após 3s. Sem JS, nunca é ocultado. */
+.js .hero-title:not(.is-revealed),
+.js .hero-description:not(.is-revealed) {
+  visibility: hidden;
+  animation: heroTextFailsafe 0s 3s forwards;
+}
+
+@keyframes heroTextFailsafe {
+  to { visibility: visible; }
+}
+
+/* Efeito de digitação (typing.js): cada letra já ocupa seu espaço final e só fica visível
+   quando é "digitada" — o layout não muda durante o efeito */
+.typing-char {
+  visibility: hidden;
+}
+
+.typing-char.is-typed {
+  visibility: visible;
+}
+
+.typing-char.is-caret {
+  position: relative;
+}
+
+.typing-char.is-caret::after {
+  content: '|';
+  position: absolute;
+  top: 0;
+  left: 100%;
+  color: var(--color-primary-base);
+  -webkit-text-fill-color: var(--color-primary-base);
+  font-weight: 400;
+  animation: caretBlink 1s step-end infinite;
+}
+
+@keyframes caretBlink {
+  50% { opacity: 0; }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: var(--spacing-md) var(--spacing-xl);
   background: transparent;
-  color: var(--color-primary-base);
+  color: var(--color-primary-ink);
   border: 2px solid var(--color-primary-base);
   border-radius: var(--border-radius-sm);
   font-weight: bold;
   font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all var(--transition-normal);
+  transition: var(--transition-normal);
+  transition-property: color, border-color, box-shadow, transform;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -148,7 +189,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--color-primary-warm), var(--color-primary-base));
+  background: var(--gradient-fire);
   z-index: -1;
   transition: transform var(--transition-normal);
   transform: scaleX(0);
@@ -157,15 +198,10 @@
 
 .btn:hover,
 .btn:focus {
-  color: var(--color-text-main);
+  color: var(--color-on-primary);
   border-color: transparent;
   box-shadow: var(--shadow-dragon);
   transform: translateY(-2px);
-}
-
-.btn:focus-visible {
-  outline: 2px solid var(--color-primary-base);
-  outline-offset: 4px;
 }
 
 .btn:hover::before,
@@ -187,16 +223,4 @@
 .btn--outline:focus {
   border-color: var(--color-bg-surface-light);
   color: var(--color-text-main);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

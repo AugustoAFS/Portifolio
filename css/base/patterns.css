@@ -1,0 +1,46 @@
+/* Padrões visuais compartilhados: um estilo geral para o que se repete entre componentes */
+
+/* Foco visível igual em todo elemento interativo (links, botões, controles) */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Rótulos em caixa alta: links da navbar, botões e títulos do footer */
+.nav-link,
+.btn,
+.footer-heading {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+}
+
+/* Botões redondos: tema e menu de contato */
+.theme-toggle,
+.contact-toggle-btn,
+.contact-button {
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Canvas das faíscas (link-fire.js): sobra em volta do container para as faíscas caírem.
+   O JS lê esse tamanho daqui, então ajustar a sobra é só mudar --fire-bleed.
+   (canvas não estica com inset, por isso largura e altura explícitas) */
+.fire-canvas {
+  --fire-bleed: 120px;
+  position: absolute;
+  top: calc(-1 * var(--fire-bleed));
+  left: calc(-1 * var(--fire-bleed));
+  width: calc(100% + 2 * var(--fire-bleed));
+  height: calc(100% + 2 * var(--fire-bleed));
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Entrada com fade e deslize vertical; a distância vem de --slide-from (padrão 20px) */
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--slide-from, 20px));
+  }
+}

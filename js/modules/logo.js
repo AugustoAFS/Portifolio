@@ -1,169 +1,265 @@
 'use strict';
 
-const IS_TOUCH = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+import { IS_TOUCH, REDUCED_MOTION } from '../core/env.js';
+import { whenVisible } from '../core/lazy.js';
+import { FIRE_COLORS, pixelRatio, clearCanvas, glowSprite } from '../core/canvas.js';
+
+const CYCLE_MS = 6000;
+const VIEWBOX = 500;            // as partículas usam as coordenadas do viewBox do SVG
+const FRAME_MS = 1000 / 60;     // física medida em quadros de 60 fps...
+const TICK_MS = 1000 / 30;      // ...mas o dragão é desenhado a 30 fps: o logo tem ~45px na tela
 const MAX_PARTICLES = IS_TOUCH ? 30 : 100;
+const GLOW = IS_TOUCH ? 5 : 20; // brilho das partículas, em px do canvas
+const AMBIENT_GLOW = IS_TOUCH ? 5 : 8;
+const SPRITE_CORE = 1.5;        // tamanho da faísca dentro do sprite (px do canvas)
+const MOUTH_X = 250;            // de onde sai o sopro de fogo
+const MOUTH_Y = 245;
+
+// Pose do dragão ao longo de um ciclo (offset 0–1). Fonte única: vira animação nativa
+// (Web Animations API) e também diz onde está a boca para o sopro de fogo.
+const TIMELINE = {
+  body:      { offsets: [0, 0.15, 0.4, 0.5, 0.65, 0.95, 1], values: [1, 1.02, 1.06, 1.04, 0.98, 1, 1] },
+  headY:     { offsets: [0, 0.15, 0.4, 0.5, 0.65, 0.95, 1], values: [0, 8, -18, -12, 6, 0, 0] },
+  wingRot:   { offsets: [0, 0.15, 0.4, 0.5, 0.75, 0.95, 1], values: [0, -2, -30, -40, -40, 0, 0] },
+  wingScale: { offsets: [0, 0.15, 0.4, 0.5, 0.75, 0.95, 1], values: [0.8, 0.8, 1.15, 1.3, 1.3, 0.8, 0.8] },
+  eyes:      { offsets: [0, 0.15, 0.25, 0.75, 0.95, 1], values: [0.1, 0.1, 1, 1, 0.1, 0.1] },
+  veins:     { offsets: [0, 0.3, 0.45, 0.65, 0.85, 1], values: [0, 0, 1, 1, 0, 0] },
+  tail:      { offsets: [0, 0.4, 0.55, 0.9, 1], values: [0.1, 0.6, 1.2, 0.1, 0.1] },
+  breath:    { offsets: [0, 0.35, 0.48, 0.6, 0.75, 1], values: [0, 0.2, 0.9, 0.8, 0, 0] },
+};
+
+// ease-in-out entre os quadros-chave equivale à suavização usada em sample()
+const keyframes = (track, toStyle) =>
+  track.offsets.map((offset, i) => ({ offset, easing: 'ease-in-out', ...toStyle(track.values[i], i) }));
+
+// Parte do SVG → quadros-chave (as transform-origin ficam no logo.css)
+const POSE = [
+  ['.dragon-body', keyframes(TIMELINE.body, v => ({ transform: `scale(${v})` }))],
+  ['.dragon-head', keyframes(TIMELINE.headY, v => ({ transform: `translateY(${v}px)` }))],
+  ['.dragon-wing-left', keyframes(TIMELINE.wingRot, (v, i) => ({ transform: `rotate(${v}deg) scale(${TIMELINE.wingScale.values[i]})` }))],
+  ['.dragon-wing-right', keyframes(TIMELINE.wingRot, (v, i) => ({ transform: `rotate(${-v}deg) scale(${TIMELINE.wingScale.values[i]})` }))],
+  ['.dragon-eyes', keyframes(TIMELINE.eyes, v => ({ opacity: v }))],
+  ['.vein', keyframes(TIMELINE.veins, v => ({ opacity: v, strokeDashoffset: `${200 - 200 * v}px` }))],
+  ['.dragon-tail-tip', keyframes(TIMELINE.tail, v => ({ opacity: Math.min(v, 1), transform: `scale(${0.5 + v})` }))],
+  ['.dragon-core-glow', keyframes(TIMELINE.breath, v => ({ opacity: v }))],
+];
 
 export function initLogo() {
-  const containers = document.querySelectorAll('.js-dragon-logo, .nav-logo__dragon');
-  if (!containers.length) return;
-
-  const fullContainer = Array.from(containers).find(c => c.querySelector('svg'));
-  if (fullContainer) {
-    const svgHTML = fullContainer.querySelector('svg').outerHTML;
-    containers.forEach(container => {
-      if (!container.querySelector('svg')) {
-        container.innerHTML = svgHTML + '<canvas></canvas>';
-      }
-    });
-  }
-
-  const BASE_SIZE = 500;
-
-  function getVal(t, keyframes) {
-    if (t <= keyframes[0].t) return keyframes[0].v;
-    if (t >= keyframes[keyframes.length - 1].t) return keyframes[keyframes.length - 1].v;
-    for (let i = 0; i < keyframes.length - 1; i++) {
-      if (t >= keyframes[i].t && t <= keyframes[i + 1].t) {
-        const s = keyframes[i], e = keyframes[i + 1];
-        const p = (t - s.t) / (e.t - s.t);
-        return s.v + (e.v - s.v) * (p * p * (3 - 2 * p));
-      }
-    }
-    return keyframes[0].v;
-  }
-
-  const animCycles = {
-    bodyScale: [{t:0,v:1},{t:0.15,v:1.02},{t:0.4,v:1.06},{t:0.5,v:1.04},{t:0.65,v:0.98},{t:0.95,v:1},{t:1,v:1}],
-    headY:     [{t:0,v:0},{t:0.15,v:8},{t:0.4,v:-18},{t:0.5,v:-12},{t:0.65,v:6},{t:0.95,v:0},{t:1,v:0}],
-    wingRot:   [{t:0,v:0},{t:0.15,v:-2},{t:0.4,v:-30},{t:0.5,v:-40},{t:0.75,v:-40},{t:0.95,v:0},{t:1,v:0}],
-    wingScale: [{t:0,v:0.8},{t:0.15,v:0.8},{t:0.4,v:1.15},{t:0.5,v:1.3},{t:0.75,v:1.3},{t:0.95,v:0.8},{t:1,v:0.8}],
-    eyeOp:     [{t:0,v:0.1},{t:0.15,v:0.1},{t:0.25,v:1},{t:0.75,v:1},{t:0.95,v:0.1},{t:1,v:0.1}],
-    veinOp:    [{t:0,v:0},{t:0.3,v:0},{t:0.45,v:1},{t:0.65,v:1},{t:0.85,v:0},{t:1,v:0}],
-    tail:      [{t:0,v:0.1},{t:0.4,v:0.6},{t:0.55,v:1.2},{t:0.9,v:0.1},{t:1,v:0.1}],
-    breathInt: [{t:0,v:0},{t:0.35,v:0.2},{t:0.48,v:0.9},{t:0.6,v:0.8},{t:0.75,v:0},{t:1,v:0}]
-  };
-
-  const fireColors = ['255, 65, 108', '255, 75, 43', '235, 87, 87', '197, 160, 89'];
-  const duration = 6000;
-
-  class Particle {
-    constructor(type, x, y, vx, vy, life, color, size) {
-      this.type = type; this.x = x; this.y = y;
-      this.vx = vx; this.vy = vy; this.life = life;
-      this.maxLife = life; this.color = color; this.size = size;
-      this.angle = Math.random() * Math.PI * 2;
-      this.spin = (Math.random() - 0.5) * 0.2;
-    }
-    update() {
-      this.x += this.vx; this.y += this.vy;
-      this.life--; this.angle += this.spin;
-      if (this.type === 'smoke') { this.size += 0.4; this.vx += (Math.random()-0.5)*0.15; }
-      else if (this.type === 'fire') { this.size *= 0.93; this.vy += 0.2; }
-      else if (this.type === 'ember') { this.size *= 0.97; this.vx += (Math.random()-0.5)*1.5; this.vy += 0.08; }
-      else if (this.type === 'ambient') { this.y -= 0.8; this.x += Math.sin(Date.now()/800+this.life)*0.8; }
-    }
-    draw(ctx) {
-      const progress = this.life / this.maxLife;
-      const alpha = this.type === 'smoke' ? progress * 0.3 :
-                    this.type === 'ambient' ? Math.sin(progress * Math.PI) * 0.8 : progress;
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.angle);
-      if (this.type !== 'smoke') {
-        ctx.shadowBlur = IS_TOUCH ? 5 : (this.type === 'ambient' ? 8 : 20);
-        ctx.shadowColor = `rgb(${this.color})`;
-      }
-      ctx.fillStyle = `rgb(${this.color})`;
-      ctx.beginPath();
-      if (this.type === 'smoke') {
-        ctx.moveTo(0,-this.size); ctx.lineTo(this.size,0); ctx.lineTo(0,this.size); ctx.lineTo(-this.size,0);
-      } else {
-        ctx.moveTo(0,-this.size*1.5); ctx.lineTo(this.size*0.5,0); ctx.lineTo(0,this.size*1.5); ctx.lineTo(-this.size*0.5,0);
-      }
-      ctx.fill();
-      ctx.restore();
-    }
-  }
+  const containers = [...document.querySelectorAll('.js-dragon')];
+  const source = containers.map(container => container.querySelector('svg')).find(Boolean);
+  if (!source) return;
 
   containers.forEach(container => {
-    const canvas = container.querySelector('canvas');
-    if (!canvas) return;
-
-    // Limita DPR no mobile para poupar memória de GPU
-    const dprCap = IS_TOUCH ? 1 : 2;
-    const ctx = canvas.getContext('2d', { alpha: true });
-    let particles = [];
-    let visible = true;
-
-    new IntersectionObserver(entries => {
-      visible = entries[0].isIntersecting;
-    }, { threshold: 0 }).observe(container);
-
-    function resizeCanvas() {
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      if (w === 0) return;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale((w * dpr) / BASE_SIZE, (h * dpr) / BASE_SIZE);
+    if (container.querySelector('svg')) {
+      startDragon(container);
+      return;
     }
-
-    window.addEventListener('resize', resizeCanvas);
-    setTimeout(resizeCanvas, 50);
-
-    function animate(time) {
-      requestAnimationFrame(animate);
-      if (!visible) return;
-
-      const t = (time % duration) / duration;
-
-      container.style.setProperty('--body-scale', getVal(t, animCycles.bodyScale));
-      const headY = getVal(t, animCycles.headY);
-      container.style.setProperty('--head-y', `${headY}px`);
-      const wingRot = getVal(t, animCycles.wingRot);
-      container.style.setProperty('--wing-rot-l', `${wingRot}deg`);
-      container.style.setProperty('--wing-rot-r', `${-wingRot}deg`);
-      container.style.setProperty('--wing-scale', getVal(t, animCycles.wingScale));
-      container.style.setProperty('--eye-opacity', getVal(t, animCycles.eyeOp));
-      container.style.setProperty('--vein-opacity', getVal(t, animCycles.veinOp));
-      container.style.setProperty('--tail-glow', getVal(t, animCycles.tail));
-      container.style.setProperty('--breath-intensity', getVal(t, animCycles.breathInt));
-
-      if (particles.length < MAX_PARTICLES) {
-        let smokeRate = 0, fireRate = 0, emberRate = 0;
-        if (t > 0.35 && t < 0.42) smokeRate = IS_TOUCH ? 1 : 3;
-        if (t > 0.48 && t < 0.65) fireRate = IS_TOUCH ? (t < 0.52 ? 5 : 3) : (t < 0.52 ? 14 : t < 0.60 ? 8 : 3);
-        if (t > 0.60 && t < 0.72) emberRate = IS_TOUCH ? 2 : 5;
-
-        // Ambientes: desabilitados no mobile (poupam CPU)
-        if (!IS_TOUCH && Math.random() < 0.1) {
-          particles.push(new Particle('ambient', Math.random()*BASE_SIZE, Math.random()*BASE_SIZE+100, (Math.random()-0.5)*1.5, -(Math.random()*2+0.5), Math.random()*100+40, '255, 65, 108', Math.random()*2+1));
-        }
-
-        const ex = 250, ey = 245 + headY;
-        for (let i = 0; i < smokeRate; i++) particles.push(new Particle('smoke', ex+(Math.random()-0.5)*15, ey, (Math.random()-0.5)*4, Math.random()*4+1, Math.random()*30+30, '11, 12, 16', Math.random()*5+8));
-        for (let i = 0; i < fireRate; i++) particles.push(new Particle('fire', ex+(Math.random()-0.5)*10, ey, (Math.random()-0.5)*6, Math.random()*12+8, Math.random()*25+10, fireColors[Math.floor(Math.random()*fireColors.length)], Math.random()*6+6));
-        for (let i = 0; i < emberRate; i++) particles.push(new Particle('ember', ex+(Math.random()-0.5)*25, ey+15, (Math.random()-0.5)*10, Math.random()*8+4, Math.random()*40+20, '255, 75, 43', Math.random()*3+1.5));
-      }
-
-      ctx.clearRect(0, 0, BASE_SIZE, BASE_SIZE);
-      ctx.globalCompositeOperation = 'source-over';
-      for (let i = particles.length - 1; i >= 0; i--) {
-        if (particles[i].type === 'smoke') { particles[i].update(); particles[i].draw(ctx); }
-      }
-      ctx.globalCompositeOperation = 'lighter';
-      for (let i = particles.length - 1; i >= 0; i--) {
-        if (particles[i].type !== 'smoke') { particles[i].update(); particles[i].draw(ctx); }
-        if (particles[i].life <= 0) particles.splice(i, 1);
-      }
-      ctx.globalCompositeOperation = 'source-over';
-    }
-
-    requestAnimationFrame(animate);
+    // O dragão do footer só é montado quando o footer se aproxima da tela
+    whenVisible(container, () => {
+      cloneDragon(source, container);
+      startDragon(container);
+    }, '300px');
   });
+}
+
+// O clone usa os <defs> (gradientes e filtros) do original: assim não há IDs duplicados
+function cloneDragon(source, container) {
+  const clone = source.cloneNode(true);
+  clone.querySelector('defs')?.remove();
+  container.append(clone, document.createElement('canvas'));
+}
+
+// Anima o dragão enquanto ele está na tela. Com movimento reduzido ele fica parado (pose do CSS).
+function startDragon(container) {
+  if (REDUCED_MOTION) return;
+
+  const loop = createDragonLoop(animatePose(container.querySelector('svg')), createBreathLayer(container));
+
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) loop.start();
+    else loop.stop();
+  }).observe(container);
+}
+
+// Pose: animações nativas (Web Animations API) com a interpolação feita pelo navegador.
+// Ficam pausadas porque quem avança o tempo é o relógio de 30 fps do dragão.
+function animatePose(svg) {
+  return POSE.flatMap(([selector, frames]) => [...svg.querySelectorAll(selector)].map(part => {
+    const animation = part.animate(frames, { duration: CYCLE_MS, iterations: Infinity });
+    animation.pause();
+    return animation;
+  }));
+}
+
+// Relógio único a 30 fps: avança a pose e o sopro juntos, desenhando metade dos quadros de 60 fps
+function createDragonLoop(poses, breath) {
+  let rafId = null;
+  let lastTick = null;
+  let elapsed = 0;
+
+  function tick(now) {
+    rafId = requestAnimationFrame(tick);
+    if (lastTick !== null && now - lastTick < TICK_MS - 1) return;
+
+    const delta = lastTick === null ? 0 : Math.min(now - lastTick, 100); // sem salto depois de uma pausa
+    lastTick = now;
+    elapsed = (elapsed + delta) % CYCLE_MS;
+
+    poses.forEach(animation => {
+      animation.currentTime = elapsed;
+    });
+    breath.update(elapsed / CYCLE_MS, Math.max(delta, TICK_MS) / FRAME_MS, now);
+  }
+
+  return {
+    start() {
+      if (rafId === null) rafId = requestAnimationFrame(tick);
+    },
+    stop() {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      lastTick = null;
+    },
+  };
+}
+
+// Valor de uma trilha no instante t (0–1), com suavização smoothstep (≈ ease-in-out)
+function sample({ offsets, values }, t) {
+  for (let i = 0; i < offsets.length - 1; i++) {
+    if (t <= offsets[i + 1]) {
+      const p = (t - offsets[i]) / (offsets[i + 1] - offsets[i]);
+      return values[i] + (values[i + 1] - values[i]) * p * p * (3 - 2 * p);
+    }
+  }
+  return values[values.length - 1];
+}
+
+// Quantidade inteira a criar neste quadro, mantendo a média por quadro de 60 fps
+function countFor(ratePerFrame, step) {
+  const amount = ratePerFrame * step;
+  return Math.floor(amount) + (Math.random() < amount % 1 ? 1 : 0);
+}
+
+const random = (min, max) => min + Math.random() * (max - min);
+const randomFireColor = () => FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)];
+
+// ---------- partículas do sopro (canvas) ----------
+
+class Particle {
+  constructor(type, x, y, vx, vy, life, color, size) {
+    Object.assign(this, { type, x, y, vx, vy, life, color, size });
+    this.maxLife = life;
+    this.startSize = size;
+  }
+
+  // Avança a física (em quadros de 60 fps) e diz se a partícula continua viva
+  update(step, now) {
+    this.x += this.vx * step;
+    this.y += this.vy * step;
+    this.life -= step;
+    if (this.type === 'smoke') {
+      this.size += 0.4 * step;
+      this.vx += (Math.random() - 0.5) * 0.15 * step;
+    } else if (this.type === 'fire') {
+      this.size *= 0.93 ** step;
+      this.vy += 0.2 * step;
+    } else if (this.type === 'ember') {
+      this.size *= 0.97 ** step;
+      this.vx += (Math.random() - 0.5) * 1.5 * step;
+      this.vy += 0.08 * step;
+    } else {
+      this.y -= 0.8 * step;
+      this.x += Math.sin(now / 800 + this.life) * 0.8 * step;
+    }
+    return this.life > 0;
+  }
+
+  // Sempre entre 0 e 1 (o canvas ignora globalAlpha fora disso e desenharia com opacidade total)
+  get alpha() {
+    const progress = this.life / this.maxLife;
+    const raw = this.type === 'smoke' ? progress * 0.3
+      : this.type === 'ambient' ? Math.sin(progress * Math.PI) * 0.8
+      : progress * Math.min(this.size / this.startSize, 1); // brilho diminui junto com a faísca
+    return Math.min(Math.max(raw, 0), 1);
+  }
+}
+
+function spawnParticles(particles, t, headY, step) {
+  if (particles.length >= MAX_PARTICLES) return;
+  const add = (count, factory) => {
+    for (let i = 0; i < count; i++) particles.push(factory());
+  };
+  const mouthY = MOUTH_Y + headY;
+
+  // Brilho ambiente: só no desktop
+  if (!IS_TOUCH) {
+    add(countFor(0.1, step), () => new Particle('ambient', random(0, VIEWBOX), random(100, VIEWBOX + 100),
+      random(-0.75, 0.75), -random(0.5, 2.5), random(40, 140), FIRE_COLORS[0], random(1, 3)));
+  }
+  if (t > 0.35 && t < 0.42) {
+    add(countFor(IS_TOUCH ? 1 : 3, step), () => new Particle('smoke', MOUTH_X + random(-7.5, 7.5), mouthY,
+      random(-2, 2), random(1, 5), random(30, 60), '11, 12, 16', random(8, 13)));
+  }
+  if (t > 0.48 && t < 0.65) {
+    const rate = IS_TOUCH ? (t < 0.52 ? 5 : 3) : (t < 0.52 ? 14 : t < 0.6 ? 8 : 3);
+    add(countFor(rate, step), () => new Particle('fire', MOUTH_X + random(-5, 5), mouthY,
+      random(-3, 3), random(8, 20), random(10, 35), randomFireColor(), random(6, 12)));
+  }
+  if (t > 0.6 && t < 0.72) {
+    add(countFor(IS_TOUCH ? 2 : 5, step), () => new Particle('ember', MOUTH_X + random(-12.5, 12.5), mouthY + 15,
+      random(-5, 5), random(4, 12), random(20, 60), FIRE_COLORS[1], random(1.5, 4.5)));
+  }
+}
+
+function drawParticles(ctx, particles, scale) {
+  clearCanvas(ctx);
+
+  // Fumaça: losango escuro, sem brilho
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = 'rgb(11, 12, 16)';
+  for (const particle of particles) {
+    if (particle.type !== 'smoke') continue;
+    ctx.globalAlpha = particle.alpha;
+    ctx.setTransform(scale, 0, 0, scale, particle.x * scale, particle.y * scale);
+    ctx.beginPath();
+    ctx.moveTo(0, -particle.size);
+    ctx.lineTo(particle.size, 0);
+    ctx.lineTo(0, particle.size);
+    ctx.lineTo(-particle.size, 0);
+    ctx.fill();
+  }
+
+  // Fogo, brasas e brilho ambiente: sprite com o brilho pronto, somando luz
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalCompositeOperation = 'lighter';
+  for (const particle of particles) {
+    if (particle.type === 'smoke') continue;
+    const sprite = glowSprite(particle.color, particle.type === 'ambient' ? AMBIENT_GLOW : GLOW, SPRITE_CORE);
+    ctx.globalAlpha = particle.alpha;
+    ctx.drawImage(sprite.canvas, particle.x * scale - sprite.extent, particle.y * scale - sprite.extent);
+  }
+
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+// Camada de partículas do sopro: recebe o instante do ciclo (t, 0–1) e quantos quadros de 60 fps passaram
+function createBreathLayer(container) {
+  const canvas = container.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let scale = 1; // px do canvas por unidade do viewBox
+
+  new ResizeObserver(() => {
+    canvas.width = canvas.height = Math.round(container.clientWidth * pixelRatio());
+    scale = canvas.width / VIEWBOX;
+  }).observe(container);
+
+  return {
+    update(t, step, now) {
+      spawnParticles(particles, t, sample(TIMELINE.headY, t), step);
+      particles = particles.filter(particle => particle.update(step, now));
+      drawParticles(ctx, particles, scale);
+    },
+  };
 }

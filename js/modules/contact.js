@@ -7,11 +7,7 @@ export function initContact() {
 
   if (!contactToggle || !contactContainer || !contactActions) return;
 
-  // Garante que o estado inicial seja sempre fechado
-  contactToggle.classList.remove('active');
-  contactContainer.classList.remove('expanded');
-  contactActions.classList.remove('active');
-  contactToggle.setAttribute('aria-expanded', 'false');
+  const isOpen = () => contactToggle.getAttribute('aria-expanded') === 'true';
 
   function openContact() {
     contactToggle.classList.add('active');
@@ -27,16 +23,29 @@ export function initContact() {
     contactToggle.setAttribute('aria-expanded', 'false');
   }
 
+  // Garante que o estado inicial seja sempre fechado
+  closeContact();
+
   contactToggle.addEventListener('click', () => {
-    const isExpanded = contactToggle.getAttribute('aria-expanded') === 'true';
-    isExpanded ? closeContact() : openContact();
+    isOpen() ? closeContact() : openContact();
   });
 
-  // Fecha ao pressionar Escape
+  // Fecha com Escape quando o foco está no menu de contato
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && contactToggle.getAttribute('aria-expanded') === 'true') {
+    if (e.key === 'Escape' && isOpen() && contactContainer.contains(document.activeElement)) {
       closeContact();
       contactToggle.focus();
     }
   });
+
+  // Abre sozinho quando a seção aparece: os contatos não ficam escondidos atrás de um clique.
+  // Depois disso o botão continua funcionando para fechar e abrir.
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      openContact();
+      observer.disconnect();
+    }
+  }, { threshold: 0.4 });
+
+  observer.observe(contactContainer);
 }

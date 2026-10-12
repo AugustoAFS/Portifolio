@@ -1,4 +1,7 @@
 :root {
+  /* Avisa o navegador do tema: barras de rolagem, controles de vídeo e formulários nativos acompanham */
+  color-scheme: dark;
+
   --color-bg-deep: #0B0C10;
   --color-bg-surface: #1F2833;
   --color-bg-surface-light: #2A3644;
@@ -9,8 +12,27 @@
   --color-text-main: #EAEAEA;
   --color-text-muted: #C5C6C7;
 
+  /* Rosa/laranja para TEXTO (contraste AA ≥ 4.5:1 sobre fundo e superfícies).
+     --color-primary-base/warm ficam para bordas, gradientes e brilhos */
+  --color-primary-ink: #FF5277;
+  --color-warm-ink: #FF5C3D;
+  /* Texto sobre preenchimento rosa/laranja (hover do .btn) */
+  --color-on-primary: #0B0C10;
+
+  /* Brilho rosa em intensidades fixas, sempre derivado da cor principal */
+  --color-glow-faint: color-mix(in srgb, var(--color-primary-base) 8%, transparent);
+  --color-glow-subtle: color-mix(in srgb, var(--color-primary-base) 15%, transparent);
+  --color-glow-soft: color-mix(in srgb, var(--color-primary-base) 25%, transparent);
+  --color-glow: color-mix(in srgb, var(--color-primary-base) 40%, transparent);
+  --color-glow-line: color-mix(in srgb, var(--color-primary-base) 50%, transparent);
+  --color-glow-strong: color-mix(in srgb, var(--color-primary-base) 60%, transparent);
+  --color-glow-border: color-mix(in srgb, var(--color-primary-base) 75%, transparent);
+
+  --gradient-fire: linear-gradient(135deg, var(--color-primary-warm), var(--color-primary-base));
+
   --font-family-base: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-title: "Cinzel", "Playfair Display", serif;
+  --tracking-caps: 1px;
 
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -19,16 +41,31 @@
   --spacing-xl: 2rem;
   --spacing-xxl: 4rem;
 
+  /* Distância do topo ao rolar até uma âncora (compensa o header fixo) */
+  --scroll-offset: 5rem;
+
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 16px;
   --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-dragon: 0 8px 15px rgba(255, 75, 43, 0.15);
+  --shadow-glow-sm: 0 0 10px var(--color-glow-strong);
+  --shadow-glow-md: 0 0 25px var(--color-glow);
+  --shadow-glow-lg: 0 0 40px var(--color-glow-strong);
+
+  --focus-ring: 2px solid var(--color-primary-base);
+  --focus-offset: 3px;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.4s var(--ease-standard);
 
   --duration-animation: 0.6s;
   --timing-animation: ease-out;
+
+  --color-divider: rgba(255, 255, 255, 0.05);
 
   /* Tokens de componente — usados no header e nav */
   --color-header-bg: rgba(11, 12, 16, 0.4);
@@ -38,17 +75,31 @@
   --color-header-border-scrolled: rgba(255, 255, 255, 0.1);
   --color-menu-bg: rgba(11, 12, 16, 0.97);
   --color-menu-border: rgba(255, 255, 255, 0.08);
+
+  /* Tokens de componente — menu de contato */
+  --color-contact-border: rgba(255, 255, 255, 0.18);
+  --shadow-contact: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+  /* Tokens de componente — prévia "janela de código" dos cards (escura nos dois temas) */
+  --color-code-bg-start: #0D1117;
+  --color-code-bg-end: #1F2833;
 }
 
 /* Modo claro */
 [data-theme="light"] {
+  color-scheme: light;
+
   --color-bg-deep: #F0F2F5;
   --color-bg-surface: #FFFFFF;
   --color-bg-surface-light: #D4D8E0;
   --color-text-main: #1A1A2E;
   --color-text-muted: #4A5568;
+  --color-primary-ink: #C81E4A;
+  --color-warm-ink: #B4361C;
   --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.08);
   --shadow-dragon: 0 8px 15px rgba(255, 75, 43, 0.2);
+
+  --color-divider: rgba(0, 0, 0, 0.08);
 
   --color-header-bg: rgba(240, 242, 245, 0.7);
   --color-header-bg-scrolled: rgba(240, 242, 245, 0.96);
@@ -57,4 +108,7 @@
   --color-header-border-scrolled: rgba(0, 0, 0, 0.12);
   --color-menu-bg: rgba(240, 242, 245, 0.99);
   --color-menu-border: rgba(0, 0, 0, 0.1);
+
+  --color-contact-border: rgba(0, 0, 0, 0.12);
+  --shadow-contact: 0 4px 20px rgba(0, 0, 0, 0.12);
 }

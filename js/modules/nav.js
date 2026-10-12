@@ -1,53 +1,58 @@
 'use strict';
 
+const SUPPORTS_POPOVER = 'popover' in HTMLElement.prototype;
+const DESKTOP = window.matchMedia('(min-width: 768px)');
+
 export function initNav() {
-  const toggleBtn = document.querySelector('.js-nav-toggle');
-  const navList = document.querySelector('.js-nav-list');
-  const navLinks = document.querySelectorAll('.js-nav-link');
   const header = document.querySelector('.js-header');
+  const menu = document.querySelector('.js-nav-list');
+  const toggle = document.querySelector('.js-nav-toggle');
+  if (!header || !menu || !toggle) return;
 
-  if (!toggleBtn || !navList || !header) return;
+  observeScroll(header);
+  if (SUPPORTS_POPOVER) setupPopoverMenu(menu);
+  else setupFallbackMenu(menu, toggle);
+}
 
-  function openMenu() {
-    navList.classList.add('nav-list--open');
-    toggleBtn.setAttribute('aria-expanded', 'true');
-  }
+// header--scrolled sem listener de scroll: um marcador invisível a 50px do topo é observado pelo
+// IntersectionObserver; quando ele sai da tela, a página foi rolada
+function observeScroll(header) {
+  const sentinel = document.createElement('div');
+  sentinel.className = 'header-sentinel';
+  document.body.prepend(sentinel);
 
-  function closeMenu() {
-    navList.classList.remove('nav-list--open');
-    toggleBtn.setAttribute('aria-expanded', 'false');
-  }
+  new IntersectionObserver(([entry]) => {
+    header.classList.toggle('header--scrolled', !entry.isIntersecting);
+  }).observe(sentinel);
+}
 
-  toggleBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-    isExpanded ? closeMenu() : openMenu();
+// Menu mobile é um popover nativo: abrir pelo botão, fechar com Escape ou clique fora, devolver o
+// foco e o aria-expanded do botão são feitos pelo navegador. Aqui só fecha ao escolher uma seção
+// e quando a tela vira desktop.
+function setupPopoverMenu(menu) {
+  const close = () => {
+    if (menu.matches(':popover-open')) menu.hidePopover();
+  };
+
+  menu.addEventListener('click', event => {
+    if (event.target.closest('a')) close();
   });
+  DESKTOP.addEventListener('change', close);
+}
 
-  // Fecha ao clicar fora
-  document.addEventListener('click', (e) => {
-    if (!header.contains(e.target)) closeMenu();
+// Navegadores sem Popover API: alterna uma classe e o aria-expanded manualmente
+function setupFallbackMenu(menu, toggle) {
+  menu.removeAttribute('popover');
+  toggle.removeAttribute('popovertarget');
+
+  const setOpen = open => {
+    menu.classList.toggle('nav-list--open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+
+  setOpen(false);
+  toggle.addEventListener('click', () => setOpen(!menu.classList.contains('nav-list--open')));
+  menu.addEventListener('click', event => {
+    if (event.target.closest('a')) setOpen(false);
   });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      if (targetId && targetId.startsWith('#')) {
-        e.preventDefault();
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          const offset = header.offsetHeight + 16;
-          window.scrollTo({
-            top: targetElement.getBoundingClientRect().top + window.scrollY - offset,
-            behavior: 'smooth'
-          });
-        }
-        closeMenu();
-      }
-    });
-  });
-
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('header--scrolled', window.scrollY > 50);
-  }, { passive: true });
 }
