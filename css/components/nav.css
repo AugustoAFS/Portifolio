@@ -185,3 +185,17 @@
 /* Em light mode: mostrar ícone de lua (clicar vai para escuro) */
 [data-theme="light"] .theme-toggle-icon--moon { display: block; }
 [data-theme="light"] .theme-toggle-icon--sun  { display: none; }
+
+/* Troca de tema com mancha de tinta (theme-ink.js): o tema novo aparece pela máscara gerada no worker,
+   quadro a quadro. A imagem e o tamanho da máscara vêm da folha de estilo que o theme-ink.js monta
+   para cada mancha. Sem a classe, vale o cross-fade padrão da View Transitions API. */
+:root.is-ink-transition::view-transition-old(root),
+:root.is-ink-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:root.is-ink-transition::view-transition-new(root) {
+  mask-repeat: no-repeat;
+  mask-position: 0 0;
+}

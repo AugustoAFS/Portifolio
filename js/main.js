@@ -1,6 +1,6 @@
 'use strict';
 
-import { IS_TOUCH, REDUCED_MOTION } from './core/env.js';
+import { IS_TOUCH, LOW_POWER, REDUCED_MOTION } from './core/env.js';
 import { run, load, afterFirstPaint, whenIdle, whenVisible, onFirstPointer } from './core/lazy.js';
 import { initTheme } from './modules/theme.js';
 import { initNav } from './modules/nav.js';
@@ -31,4 +31,7 @@ if (!REDUCED_MOTION) {
 
   // Fogo nos links da navbar: no primeiro mouse sobre ela (não existe em telas touch)
   if (!IS_TOUCH) onFirstPointer('.nav', () => load(() => import('./modules/link-fire.js'), 'initLinkFire'));
+
+  // Mancha de tinta na troca de tema: quando ocioso e fora de aparelhos fracos (até lá, vale o cross-fade)
+  if (!LOW_POWER) whenIdle(() => load(() => import('./modules/theme-ink.js'), 'initThemeInk'));
 }

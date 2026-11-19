@@ -8,6 +8,13 @@ const DARK = 'dark';
 const LIGHT = 'light';
 const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
+// Transição especial registrada por um módulo de efeito (a mancha de tinta do theme-ink.js)
+let customTransition = null;
+
+export function setThemeTransition(transition) {
+  customTransition = transition;
+}
+
 export function initTheme() {
   const button = document.querySelector('.js-theme-toggle');
   if (!button) return;
@@ -38,16 +45,27 @@ function isTheme(value) {
   return value === DARK || value === LIGHT;
 }
 
-// Troca com a View Transitions API: o navegador faz um cross-fade da página inteira, em vez de
-// animar a cor de cada elemento. Sem suporte (ou com movimento reduzido), a troca é instantânea.
+// Troca com a View Transitions API, em vez de animar a cor de cada elemento. A transição especial
+// devolve true quando assume a troca; senão (ainda não carregou, mancha não está pronta), o navegador
+// faz o cross-fade da página inteira. Sem suporte (ou com movimento reduzido), a troca é instantânea.
 function switchTheme(theme, button) {
   const apply = () => {
     document.documentElement.setAttribute('data-theme', theme);
     syncControls(theme, button);
   };
 
-  if (document.startViewTransition && !REDUCED_MOTION) document.startViewTransition(apply);
-  else apply();
+  if (!document.startViewTransition || REDUCED_MOTION) apply();
+  else if (!startCustomTransition(apply, button)) document.startViewTransition(apply);
+}
+
+// Um erro no efeito não pode impedir a troca: nesse caso, vale o cross-fade
+function startCustomTransition(apply, button) {
+  try {
+    return customTransition?.(apply, button) ?? false;
+  } catch (error) {
+    console.error('[themeTransition]', error);
+    return false;
+  }
 }
 
 // Rótulo do botão e cor da barra do navegador no celular
